@@ -1,5 +1,7 @@
-## SBNZ Projekat - Pomoć veterinarima pri lečenju mačaka
+# Sistemi bazirani na znanju
 
-# Članovi:
-	- Veljko Tošić sw55-2018
-	- Bojan Baškalo sw49-2018
+## Sistem za pomoć veterinarima pri lečenju mačaka
+
+## Članovi:
+- Veljko Tošić sw55-2018
+- Bojan Baškalo sw49-2018
