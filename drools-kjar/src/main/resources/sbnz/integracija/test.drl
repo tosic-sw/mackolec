@@ -1,0 +1,11 @@
+package com.sample
+ 
+//import com.siit.sbnz.timdarmar.models.DummyClass;
+ 
+rule "Hello World"
+	agenda-group "mackolec"
+    when
+		DummyClass()
+    then
+        System.out.println( "Pozdrav" );
+end
