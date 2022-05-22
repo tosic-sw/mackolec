@@ -1,0 +1,1 @@
+INSERT INTO cat (jmbm, name, age, weight, breed, gender) VALUES ('001', 'Igor', 4, 6, 'RUSKA', 'MALE');
