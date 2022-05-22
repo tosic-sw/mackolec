@@ -1,11 +1,11 @@
 package com.sample
  
-//import com.siit.sbnz.timdarmar.models.DummyClass;
+import com.vet.mackolec.models.VetStation;
  
 rule "Hello World"
 	agenda-group "mackolec"
     when
-		DummyClass()
+		VetStation()
     then
-        System.out.println( "Pozdrav" );
+        System.out.println( "Meow meow ili na srpskom mjau mjau" );
 end
