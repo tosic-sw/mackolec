@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "medicine")
 public class Medicine {
@@ -21,27 +21,34 @@ public class Medicine {
     @Column(name="id", unique=true, nullable=false)
     private Long id;
 
+    @NonNull
     @Column(name="name", unique=true, nullable=false)
     private String name;
 
+    @NonNull
     @Column(name="female_fit", nullable=false)
-    private boolean femaleFit;
+    private Boolean femaleFit;
 
+    @NonNull
     @Column(name="male_fit", nullable=false)
-    private boolean maleFit;
+    private Boolean maleFit;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name="category", nullable=false)
     private MedicineCategory category;
 
+    @NonNull
     @OneToMany(mappedBy = "medicine")
     private Set<Therapy> therapies;
 
+    @NonNull
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "medicine_unsuitable_age", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     Set<CatAge> unsuitableForAge;
 
+    @NonNull
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "medicine_unsuitable_breed", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)

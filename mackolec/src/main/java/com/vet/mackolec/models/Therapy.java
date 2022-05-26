@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "therapy")
 public class Therapy {
@@ -19,24 +19,30 @@ public class Therapy {
     @Column(name="id", unique=true, nullable=false)
     private Long id;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name="therapy_strength", nullable=false)
     private TherapyStrength therapyStrength;
 
+    @NonNull
     @Column(name = "date", nullable=false)
     private Long date;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "cat_id")
     private Cat cat;
 
+    @NonNull
     @OneToMany(mappedBy = "therapy")
     private Set<ObservedSymptom> observedSymptoms;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "diseaseId")
     private Disease disease;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "medicineId")
     private Medicine medicine;

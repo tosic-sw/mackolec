@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "symptom")
 public class Symptom {
@@ -19,9 +19,11 @@ public class Symptom {
     @Column(name="id", unique=true, nullable=false)
     private Long id;
 
+    @NonNull
     @Column(name="name", unique=true, nullable=false)
     private String name;
 
+    @NonNull
     @OneToMany(mappedBy = "symptom")
     Set<ObservedSymptom> observedSymptoms;
 }
