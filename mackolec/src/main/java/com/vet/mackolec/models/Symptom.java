@@ -4,6 +4,7 @@ package com.vet.mackolec.models;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.Set;
 
 @Getter
@@ -23,7 +24,6 @@ public class Symptom {
     @Column(name="name", unique=true, nullable=false)
     private String name;
 
-    @NonNull
     @OneToMany(mappedBy = "symptom")
     Set<ObservedSymptom> observedSymptoms;
 }
