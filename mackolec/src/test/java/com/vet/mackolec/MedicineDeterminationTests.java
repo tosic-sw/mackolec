@@ -31,7 +31,7 @@ public class MedicineDeterminationTests {
     }
 	
 	 @Test
-	 public void maceTest() {
+	 public void medicationDetermination() {
 		KieSession kieSession = kieContainer.newKieSession();
 		kieSession.getAgenda().getAgendaGroup("medicine_determination").setFocus();
 		

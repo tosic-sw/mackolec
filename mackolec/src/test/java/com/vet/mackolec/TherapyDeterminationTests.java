@@ -38,7 +38,7 @@ public class TherapyDeterminationTests {
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(2), new Integer(300), Breed.RUSKA, CatAge.MACE, Gender.MALE);
-		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new HashSet<CatAge>(), new HashSet<Breed>());
+		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new Disease(),  new HashSet<CatAge>(), new HashSet<Breed>());
 	    
 		Therapy therapy = new Therapy(TherapyStrength.UNDEFINED, (new Date()).getTime(), cat, new HashSet<ObservedSymptom>(), new Disease(), m1);
 		
@@ -54,7 +54,7 @@ public class TherapyDeterminationTests {
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(25), new Integer(1500), Breed.RUSKA, CatAge.ODRASLA_MACKA, Gender.MALE);
-		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.SREDNJE_JAK_LEK, new HashSet<Therapy>(), new HashSet<CatAge>(), new HashSet<Breed>());
+		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.SREDNJE_JAK_LEK, new HashSet<Therapy>(), new Disease(), new HashSet<CatAge>(), new HashSet<Breed>());
 	    
 		Therapy therapy = new Therapy(TherapyStrength.UNDEFINED, (new Date()).getTime(), cat, new HashSet<ObservedSymptom>(), new Disease(), m1);
 		
@@ -70,7 +70,7 @@ public class TherapyDeterminationTests {
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(30), new Integer(7100), Breed.MAINE_COON, CatAge.ODRASLA_MACKA, Gender.MALE);
-		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new HashSet<CatAge>(), new HashSet<Breed>());
+		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new Disease(), new HashSet<CatAge>(), new HashSet<Breed>());
 	    
 		Therapy therapy = new Therapy(TherapyStrength.UNDEFINED, (new Date()).getTime(), cat, new HashSet<ObservedSymptom>(), new Disease(), m1);
 		
@@ -86,7 +86,7 @@ public class TherapyDeterminationTests {
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
-		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new HashSet<CatAge>(), new HashSet<Breed>());
+		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), new Disease(), new HashSet<CatAge>(), new HashSet<Breed>());
 	    
 		Therapy therapy = new Therapy(TherapyStrength.UNDEFINED, (new Date()).getTime(), cat, new HashSet<ObservedSymptom>(), new Disease(), m1);
 		
@@ -102,7 +102,7 @@ public class TherapyDeterminationTests {
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(2), new Integer(7300), Breed.RUSKA, CatAge.MACE, Gender.MALE);
-		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.SREDNJE_JAK_LEK, new HashSet<Therapy>(), new HashSet<CatAge>(), new HashSet<Breed>());
+		Medicine m1 = new Medicine("mackolecin", true, true, MedicineCategory.SREDNJE_JAK_LEK, new HashSet<Therapy>(), new Disease(), new HashSet<CatAge>(), new HashSet<Breed>());
 	    
 		Therapy therapy = new Therapy(TherapyStrength.UNDEFINED, (new Date()).getTime(), cat, new HashSet<ObservedSymptom>(), new Disease(), m1);
 		

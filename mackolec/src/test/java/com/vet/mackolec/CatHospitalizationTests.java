@@ -1,4 +1,4 @@
-package com.vet.mackolec.dummyTest;
+package com.vet.mackolec;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
