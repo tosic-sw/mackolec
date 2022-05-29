@@ -22,8 +22,11 @@ public class ObservedSymptom {
     @ManyToOne
     @JoinColumn(name = "symptomId")
     private Symptom symptom;
-
+    
     @NonNull
+    @Column(name="level")
+    private Double level;
+
     @ManyToOne
     @JoinColumn(name = "therapyId")
     private Therapy therapy;

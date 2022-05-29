@@ -24,6 +24,7 @@ public class BasicTransformationTests {
 	 @Test
 	 public void maceTest() {
 		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		
 	    Cat cat = new Cat();
 	    cat.setAge(2);
@@ -37,7 +38,8 @@ public class BasicTransformationTests {
 	 @Test
 	 public void mladaMackaTest() {
 		 KieSession kieSession = kieContainer.newKieSession();
-			
+		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
+		 
 		 Cat cat = new Cat();
 		 cat.setAge(4);
 		    
@@ -50,7 +52,8 @@ public class BasicTransformationTests {
 	 @Test
 	 public void odraslaMackaTest() {
 		 KieSession kieSession = kieContainer.newKieSession();
-			
+		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
+		 
 		 Cat cat = new Cat();
 		 cat.setAge(25);
 		    
@@ -63,7 +66,8 @@ public class BasicTransformationTests {
 	 @Test
 	 public void staraMackaTest() {
 		 KieSession kieSession = kieContainer.newKieSession();
-			
+		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
+		 
 		 Cat cat = new Cat();
 		 cat.setAge(50);
 		    

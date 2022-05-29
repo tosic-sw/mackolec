@@ -67,7 +67,6 @@ public class Cat {
     @Column(name = "gender", nullable=false)
     private Gender gender;
 
-    @NonNull
     @OneToMany(mappedBy = "cat")
     Set<Therapy> therapies;
 }

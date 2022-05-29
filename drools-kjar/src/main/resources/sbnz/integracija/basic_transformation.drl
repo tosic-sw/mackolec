@@ -1,32 +1,36 @@
-package com.sample
+package sbnz.integracija
  
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.enums.CatAge;
  
 rule "Mace"
+    agenda-group "basic_transformation"
     when 
-    	$c: Cat(age < 3 && ageEnum == null)
+        $c: Cat(age < 3 && ageEnum == null)
     then 
-    	$c.setAgeEnum(CatAge.MACE);
+        $c.setAgeEnum(CatAge.MACE);
 end
 
 rule "MladaMacka"
+    agenda-group "basic_transformation"
     when 
-    	$c: Cat(age >= 3 && age < 24 && ageEnum == null)
+        $c: Cat(age >= 3 && age < 24 && ageEnum == null)
     then 
-    	$c.setAgeEnum(CatAge.MLADA_MACKA);
+        $c.setAgeEnum(CatAge.MLADA_MACKA);
 end
 
 rule "OdraslaMacka"
+    agenda-group "basic_transformation"
     when 
-    	$c: Cat(age >= 24 && age < 48 && ageEnum == null)
+        $c: Cat(age >= 24 && age < 48 && ageEnum == null)
     then 
-    	$c.setAgeEnum(CatAge.ODRASLA_MACKA);
+        $c.setAgeEnum(CatAge.ODRASLA_MACKA);
 end
 
 rule "StaraMacka"
+    agenda-group "basic_transformation"
     when 
-    	$c: Cat(age >= 48 && ageEnum == null)
+        $c: Cat(age >= 48 && ageEnum == null)
     then 
-    	$c.setAgeEnum(CatAge.STARA_MACKA);
+        $c.setAgeEnum(CatAge.STARA_MACKA);
 end

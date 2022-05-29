@@ -1,0 +1,47 @@
+package sbnz.integracija
+
+import com.vet.mackolec.models.helper.*;
+import com.vet.mackolec.models.*;
+import com.vet.mackolec.models.enums.*;
+
+import java.util.*;
+
+global Double THRESHOLD; // hospitalization mean symptoms intensity treshold
+
+function double calculateMeanIntensity(List observedSymptoms) {
+	double sumOfIntesity = 0.0;
+	for (int i = 0; i < observedSymptoms.size(); i++) 
+	{ 
+	    sumOfIntesity += ((ObservedSymptom) observedSymptoms.get(i)).getLevel();
+	}
+	return sumOfIntesity / observedSymptoms.size();
+}
+
+rule "Initialize"
+	agenda-group "hospitalization"
+	salience 100
+	when
+	then
+		kcontext.getKieRuntime().setGlobal("THRESHOLD", 3.7);
+end 
+
+
+rule "Hospitalization - based intensity of sypmtoms -- NEED"
+	agenda-group "hospitalization"
+    when 
+    	$observation: CatSymptomsObservation(observedSymptoms != null, observedSymptoms.size() != 0, hospitalization == Hospitalization.UNDEFINED)
+    	eval(calculateMeanIntensity($observation.getObservedSymptoms()) > THRESHOLD)
+    then 
+    	$observation.setHospitalization(Hospitalization.NEED);
+end
+
+
+rule "Hospitalization - based intensity of sypmtoms -- NO_NEED"
+	agenda-group "hospitalization"
+    when 
+    	$observation: CatSymptomsObservation(observedSymptoms != null, observedSymptoms.size() != 0, hospitalization == Hospitalization.UNDEFINED)
+    	eval(calculateMeanIntensity($observation.getObservedSymptoms()) <= THRESHOLD)
+    then 
+    	$observation.setHospitalization(Hospitalization.NO_NEED);
+end
+
