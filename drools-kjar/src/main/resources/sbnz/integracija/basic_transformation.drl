@@ -1,0 +1,32 @@
+package com.sample
+ 
+import com.vet.mackolec.models.Cat;
+import com.vet.mackolec.models.enums.CatAge;
+ 
+rule "Mace"
+    when 
+    	$c: Cat(age < 3 && ageEnum == null)
+    then 
+    	$c.setAgeEnum(CatAge.MACE);
+end
+
+rule "MladaMacka"
+    when 
+    	$c: Cat(age >= 3 && age < 24 && ageEnum == null)
+    then 
+    	$c.setAgeEnum(CatAge.MLADA_MACKA);
+end
+
+rule "OdraslaMacka"
+    when 
+    	$c: Cat(age >= 24 && age < 48 && ageEnum == null)
+    then 
+    	$c.setAgeEnum(CatAge.ODRASLA_MACKA);
+end
+
+rule "StaraMacka"
+    when 
+    	$c: Cat(age >= 48 && ageEnum == null)
+    then 
+    	$c.setAgeEnum(CatAge.STARA_MACKA);
+end

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.vet.mackolec.models.enums.Breed;
+import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Gender;
 
 import lombok.Getter;
@@ -46,7 +47,6 @@ public class Cat {
     @NonNull
     @Column(name = "age", nullable=false)
     private Integer age;
-
     
     @NonNull
     @Column(name = "weight", nullable=false)
@@ -56,6 +56,11 @@ public class Cat {
     @Enumerated(EnumType.STRING)
     @Column(name = "breed", nullable=false)
     private Breed breed;
+    
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "age_enum", nullable=false)
+    private CatAge ageEnum;
 
     @NonNull
     @Enumerated(EnumType.STRING)
