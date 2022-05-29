@@ -36,4 +36,8 @@ public class Disease {
     @NonNull
     @OneToMany(mappedBy = "disease")
     private Set<Therapy> therapies;
+    
+    @NonNull
+    @OneToMany(mappedBy = "disease")
+    private Set<Medicine> medicine;
 }

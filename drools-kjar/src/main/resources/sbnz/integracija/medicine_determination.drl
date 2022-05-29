@@ -1,0 +1,33 @@
+package com.sample
+ 
+import com.vet.mackolec.models.Cat;
+import com.vet.mackolec.models.Therapy;
+import com.vet.mackolec.models.Medicine;
+import com.vet.mackolec.models.enums.*;
+
+import java.util.*;
+ 
+function boolean isSuitableForGender(boolean maleFit, boolean femaleFit, Gender gender) {
+    if(gender == Gender.MALE)
+    	return maleFit;
+    return femaleFit;
+}
+ 
+rule "MedicineDetermination"
+	agenda-group "medicine_determination"
+    when 
+    	$therapy: Therapy(medicine == null, $cat: cat, $disease: disease)
+
+    	$medicineList: List(size > 0) from collect (
+    		Medicine(
+    			(disease == $disease) && 
+    			!(unsuitableForAge contains $cat.ageEnum) && 
+    			!(unsuitableForBreed contains $cat.breed) && 
+    			isSuitableForGender(maleFit, femaleFit, $cat.gender)
+    		) from $disease.getMedicine()
+    	) 
+    then 
+    	System.out.println("The number of determined medicine is: " + $medicineList.size());
+    	$therapy.setMedicine((Medicine) $medicineList.get(0));
+end
+

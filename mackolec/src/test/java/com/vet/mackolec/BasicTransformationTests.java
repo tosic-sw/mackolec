@@ -1,4 +1,4 @@
-package com.vet.mackolec.dummyTest;
+package com.vet.mackolec;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,6 +24,7 @@ public class BasicTransformationTests {
 	 @Test
 	 public void maceTest() {
 		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		
 	    Cat cat = new Cat();
 	    cat.setAge(2);

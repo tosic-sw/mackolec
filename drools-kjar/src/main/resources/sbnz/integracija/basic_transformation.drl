@@ -4,6 +4,7 @@ import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.enums.CatAge;
  
 rule "Mace"
+	agenda-group "basic_transformation"
     when 
     	$c: Cat(age < 3 && ageEnum == null)
     then 
@@ -11,6 +12,7 @@ rule "Mace"
 end
 
 rule "MladaMacka"
+    agenda-group "basic_transformation"
     when 
     	$c: Cat(age >= 3 && age < 24 && ageEnum == null)
     then 
@@ -18,6 +20,7 @@ rule "MladaMacka"
 end
 
 rule "OdraslaMacka"
+    agenda-group "basic_transformation"
     when 
     	$c: Cat(age >= 24 && age < 48 && ageEnum == null)
     then 
@@ -25,6 +28,7 @@ rule "OdraslaMacka"
 end
 
 rule "StaraMacka"
+    agenda-group "basic_transformation"
     when 
     	$c: Cat(age >= 48 && ageEnum == null)
     then 

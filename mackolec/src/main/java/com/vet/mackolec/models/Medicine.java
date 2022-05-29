@@ -41,6 +41,11 @@ public class Medicine {
     @NonNull
     @OneToMany(mappedBy = "medicine")
     private Set<Therapy> therapies;
+    
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "diseaseId")
+    private Disease disease;
 
     @NonNull
     @ElementCollection(fetch = FetchType.EAGER)
