@@ -1,0 +1,81 @@
+package sbnz.integracija
+
+import com.vet.mackolec.models.Therapy;
+import com.vet.mackolec.models.enums.TherapyStrength;
+import com.vet.mackolec.models.enums.MedicineCategory;
+
+function MedicineCategory getNextStrength(TherapyStrength previousStrength) {
+    return TherapyStrength.valueOf(previousStrength.getValue() + 1);
+}
+
+rule "therapy determination based on history when strength can be bigger"
+	agenda-group "therapy_determination_with_history"
+    when 
+    	$therapy: Therapy(id == null, $disease: disease)
+    	$lastTherapy: Therapy(id != null, disease.name == $disease.name, therapyStrength != TherapyStrength.MG500)
+    then 
+    	$therapy.setTherapyStrength(getNextStrength($therapy.therapyStrength));
+end
+
+rule "therapy determination based on history when medicine category needs to increase from SLAB_LEK to SREDNJE_JAK_LEK"
+	agenda-group "therapy_determination_with_history"
+    when 
+    	$therapy: Therapy(id == null, $disease: disease)
+    	$lastTherapy: Therapy(id != null, disease.name == $disease.name, therapyStrength == TherapyStrength.MG500, 
+    						  medicine.category == MedicineCategory.SLAB_LEK)
+    						  
+    	$medicineList: List(size > 0) from collect (
+    		Medicine(
+    			category == MedicineCategory.SREDNJE_JAK_LEK
+    		) from $disease.getMedicine()
+    	)
+    then 
+    	// Koju jacinu terapiju dodeliti? Da li ponovo rezoner za odredjivanje terapije? Kako da otkrijem da ni jedan lek nije dodeljen
+    	$therapy.setMedicine($medicineList.get(0));
+end
+
+rule "therapy determination based on history when medicine category needs to increase from SLAB_LEK to JAK_LEK"
+	agenda-group "therapy_determination_with_history"
+    when 
+    	$therapy: Therapy(id == null, $disease: disease)
+    	$lastTherapy: Therapy(id != null, disease.name == $disease.name, therapyStrength == TherapyStrength.MG500, 
+    						  medicine.category == MedicineCategory.SLAB_LEK)
+    						  
+    	$medicineList: List(size > 0) from collect (
+    		Medicine(
+    			category == MedicineCategory.JAK_LEK
+    		) from $disease.getMedicine()
+    	)
+    then 
+    	$therapy.setMedicine($medicineList.get(0));
+end
+
+rule "therapy determination based on history when medicine category needs to increase from SREDNJE_JAK_LEK to JAK_LEK"
+	agenda-group "therapy_determination_with_history"
+    when 
+    	$therapy: Therapy(id == null, $disease: disease)
+    	$lastTherapy: Therapy(id != null, disease.name == $disease.name, therapyStrength == TherapyStrength.MG500, 
+    						  medicine.category == MedicineCategory.SREDNJE_JAK_LEK)
+    						  
+    	$medicineList: List(size > 0) from collect (
+    		Medicine(
+    			category == MedicineCategory.JAK_LEK
+    		) from $disease.getMedicine()
+    	)
+    then 
+    	// Sta ako nema leka u kategoriji jak lek?? Najlakse dodati da postoji lek iz svake kategorije za odredjenu bolest.
+    	$therapy.setMedicine($medicineList.get(0));
+end
+
+rule "therapy determination based on history when medicine category needs to increase from JAK_LEK to same with hospitalization"
+	agenda-group "therapy_determination_with_history"
+    when 
+    	$therapy: Therapy(id == null, $disease: disease)
+    	$lastTherapy: Therapy(id != null, disease.name == $disease.name, therapyStrength == TherapyStrength.MG500, 
+    						  medicine.category == MedicineCategory.JAK_LEK)					  
+    then 
+    	$therapy.setHospitalization(true);
+end
+
+
+

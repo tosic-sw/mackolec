@@ -10,23 +10,9 @@ rule "TherapyDetermination MG100"
     	$therapy: Therapy(therapyStrength == TherapyStrength.UNDEFINED, $medicine : medicine, $cat : cat)
     	eval($medicine.getCategory() == MedicineCategory.JAK_LEK)
     	eval($cat.getWeight() < 500)
-    	//eval($medicine.getCategory() == MedicineCategory.JAK_LEK && $cat.getWeight() < 500)
     then 
     	$therapy.setTherapyStrength(TherapyStrength.MG100);
 end
-
-/*
-rule "TherapyDetermination MG200"
-	agenda-group "therapy_determination"
-    when 
-    	$therapy: Therapy(therapyStrength == TherapyStrength.UNDEFINED, $medicine : medicine, $cat : cat)
-    	eval(($medicine.getCategory() == MedicineCategory.SLAB_LEK && $cat.getWeight() < 500)) ||
-    	($medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK && $cat.getWeight() < 1200) ||
-    	($medicine.getCategory() == MedicineCategory.JAK_LEK && $cat.getWeight() >= 500 && $cat.getWeight() < 3000))
-    then 
-    	$therapy.setTherapyStrength(TherapyStrength.MG200);
-end
-*/
 
 rule "TherapyDetermination MG200 - SLAB_LEK"
 	agenda-group "therapy_determination"
@@ -48,6 +34,7 @@ rule "TherapyDetermination MG200 - SREDNJE_JAK_LEK"
     	$therapy.setTherapyStrength(TherapyStrength.MG200);
 end
 
+
 rule "TherapyDetermination MG200 - JAK_LEK"
 	agenda-group "therapy_determination"
     when 
@@ -58,18 +45,6 @@ rule "TherapyDetermination MG200 - JAK_LEK"
     	$therapy.setTherapyStrength(TherapyStrength.MG200);
 end
 
-/*
-rule "TherapyDetermination MG300"
-	agenda-group "therapy_determination"
-    when 
-    	$therapy: Therapy(therapyStrength == TherapyStrength.UNDEFINED, $medicine : medicine, $cat : cat)
-    	eval(($medicine.getCategory() == MedicineCategory.SLAB_LEK && $cat.getWeight() >= 500 && $cat.getWeight() < 1200) ||
-    	($medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK && $cat.getWeight() >= 1200 && $cat.getWeight() < 3000) ||
-    	($medicine.getCategory() == MedicineCategory.JAK_LEK && $cat.getWeight() >= 3000 && $cat.getWeight() < 7000))
-    then 
-    	$therapy.setTherapyStrength(TherapyStrength.MG300);
-end
-*/
 
 rule "TherapyDetermination MG300 - SLAB_LEK"
 	agenda-group "therapy_determination"
@@ -81,6 +56,7 @@ rule "TherapyDetermination MG300 - SLAB_LEK"
     	$therapy.setTherapyStrength(TherapyStrength.MG300);
 end
 
+
 rule "TherapyDetermination MG300 - SREDNJE_JAK_LEK"
 	agenda-group "therapy_determination"
     when 
@@ -90,6 +66,7 @@ rule "TherapyDetermination MG300 - SREDNJE_JAK_LEK"
     then 
     	$therapy.setTherapyStrength(TherapyStrength.MG300);
 end
+
 
 rule "TherapyDetermination MG300 - JAK_LEK"
 	agenda-group "therapy_determination"
@@ -102,20 +79,6 @@ rule "TherapyDetermination MG300 - JAK_LEK"
 end
 
 
-/*
-rule "TherapyDetermination MG400"
-	agenda-group "therapy_determination"
-    when 
-    	$therapy: Therapy(therapyStrength == TherapyStrength.UNDEFINED, $medicine : medicine, $cat : cat)
-    	eval($medicine.getCategory() == MedicineCategory.SLAB_LEK && $cat.getWeight() >= 1200 && $cat.getWeight() < 3000) ||
-    	($medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK && $cat.getWeight() >= 3000 && $cat.getWeight() < 7000) ||
-    	($medicine.getCategory() == MedicineCategory.JAK_LEK && $cat.getWeight() >= 7000))
-    then 
-    	$therapy.setTherapyStrength(TherapyStrength.MG400);
-end
-*/
-
-
 rule "TherapyDetermination MG400 - SLAK_LEK"
 	agenda-group "therapy_determination"
     when 
@@ -126,6 +89,7 @@ rule "TherapyDetermination MG400 - SLAK_LEK"
     	$therapy.setTherapyStrength(TherapyStrength.MG400);
 end
 
+
 rule "TherapyDetermination MG400 - SREDNJE_JAK_LEK"
 	agenda-group "therapy_determination"
     when 
@@ -135,6 +99,7 @@ rule "TherapyDetermination MG400 - SREDNJE_JAK_LEK"
     then 
     	$therapy.setTherapyStrength(TherapyStrength.MG400);
 end
+
 
 rule "TherapyDetermination MG400 - JAK_LEK"
 	agenda-group "therapy_determination"
@@ -147,18 +112,6 @@ rule "TherapyDetermination MG400 - JAK_LEK"
 end
 
 
-/*
-rule "TherapyDetermination MG500"
-	agenda-group "therapy_determination"
-    when 
-    	$therapy: Therapy(therapyStrength == TherapyStrength.UNDEFINED, $medicine : medicine, $cat : cat)
-    	eval(($medicine.getCategory() == MedicineCategory.SLAB_LEK && $cat.getWeight() >= 3000)) ||
-    	($medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK && $cat.getWeight() >= 7000))
-    then 
-    	$therapy.setTherapyStrength(TherapyStrength.MG500);
-end
-*/
-
 rule "TherapyDetermination MG500 - SLAB_LEK"
 	agenda-group "therapy_determination"
     when 
@@ -168,6 +121,7 @@ rule "TherapyDetermination MG500 - SLAB_LEK"
     then 
     	$therapy.setTherapyStrength(TherapyStrength.MG500);
 end
+
 
 rule "TherapyDetermination MG500 - SREDNJE_JAK_LEK"
 	agenda-group "therapy_determination"

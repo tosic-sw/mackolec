@@ -27,6 +27,10 @@ public class Therapy {
     @NonNull
     @Column(name = "date", nullable=false)
     private Long date;
+    
+    @NonNull
+    @Column(name = "date", nullable=false)
+    private Boolean hospitalization;
 
     @NonNull
     @ManyToOne
@@ -46,4 +50,6 @@ public class Therapy {
     @ManyToOne
     @JoinColumn(name = "medicineId")
     private Medicine medicine;
+    
+    
 }

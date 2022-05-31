@@ -27,7 +27,6 @@ rule "MedicineDetermination"
     		) from $disease.getMedicine()
     	) 
     then 
-    	System.out.println("The number of determined medicine is: " + $medicineList.size());
     	$therapy.setMedicine((Medicine) $medicineList.get(0));
 end
 
