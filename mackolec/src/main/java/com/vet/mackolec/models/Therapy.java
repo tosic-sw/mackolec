@@ -1,5 +1,6 @@
 package com.vet.mackolec.models;
 
+import com.vet.mackolec.models.enums.Hospitalization;
 import com.vet.mackolec.models.enums.TherapyStrength;
 import lombok.*;
 
@@ -29,8 +30,8 @@ public class Therapy {
     private Long date;
     
     @NonNull
-    @Column(name = "date", nullable=false)
-    private Boolean hospitalization;
+    @Column(name = "hospitalization", nullable=false)
+    private Hospitalization hospitalization;
 
     @NonNull
     @ManyToOne
@@ -50,6 +51,5 @@ public class Therapy {
     @ManyToOne
     @JoinColumn(name = "medicineId")
     private Medicine medicine;
-    
     
 }

@@ -1,1 +1,1 @@
-INSERT INTO cat (jmbm, name, age, weight, breed, gender) VALUES ('001', 'Igor', 4, 6, 'RUSKA', 'MALE');
+insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('007', 'Bond', 3, 20, 'RUSKA', 'ODRASLA_MACKA', 'MALE')
