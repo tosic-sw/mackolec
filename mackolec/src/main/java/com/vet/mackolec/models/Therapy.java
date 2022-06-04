@@ -30,7 +30,7 @@ public class Therapy {
     private Long date;
     
     @NonNull
-    @Column(name = "hospitalization", nullable=false)
+    @Column(name = "hospitalization", nullable=false) // Obrisati
     private Hospitalization hospitalization;
 
     @NonNull

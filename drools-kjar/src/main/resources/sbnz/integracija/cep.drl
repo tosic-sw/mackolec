@@ -1,0 +1,56 @@
+package sbnz.integracija
+
+import com.vet.mackolec.models.Cat;
+import com.vet.mackolec.models.HospitalizedCat;
+import com.vet.mackolec.models.AlarmNotification;
+
+// SREDI IMPORTE
+// DODATI KONTROLER I SERVIS DA BI SKRIPTE MOGLE DA GADJAJU
+
+rule "More than 35 beats in last minute"
+    when
+    	HospitalizedCat($cat: cat)
+    	Number(intValue > 35) from accumulate (
+    		HeartBeatEvent(jmbm = $cat.jmbm) 
+            over window:time(60s)
+    	)
+    then
+        insert(new AlarmNotification($cat.getJmbm(), "Cat has heart problems, possible heart attack!"));
+        // drools.halt();
+end
+
+rule "Oxygen level less than 94% in last 3 minutes"
+    when
+    	HospitalizedCat($cat: cat)
+    	not (
+    		OxygenOutEvent(jmbm = $cat.jmbm, oxygenLevel >= 94) 
+    		over window:time(180s)
+    	)
+    then
+        insert(new AlarmNotification($cat.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!"));
+        // drools.halt();
+end
+
+rule "Fluid level less than 1ml/s in last 40 seconds"
+    when
+    	HospitalizedCat($cat: cat)
+    	not (
+    		FluidEvent(jmbm = $cat.jmbm, fluidLevel < 1) 
+    		over window:time(40s)
+    	)
+    then
+        insert(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!"));
+        // drools.halt();
+end
+
+rule "Fluid level more than 12ml/s in last 40 seconds"
+    when
+    	HospitalizedCat($cat: cat)
+    	not (
+    		FluidEvent(jmbm = $cat.jmbm, fluidLevel > 12) 
+    		over window:time(40s)
+    	)
+    then
+        insert(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!"));
+        // drools.halt();
+end
