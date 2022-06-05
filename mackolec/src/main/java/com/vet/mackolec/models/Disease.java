@@ -2,11 +2,15 @@ package com.vet.mackolec.models;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,4 +44,12 @@ public class Disease {
     @NonNull
     @OneToMany(mappedBy = "disease")
     private Set<Medicine> medicine;
+   
+    @ManyToMany
+    @JoinTable(name = "disease_symptom",
+            joinColumns = @JoinColumn(name = "disease_id"),
+            inverseJoinColumns = @JoinColumn(name = "symptom_id")
+    )
+    private Set<Symptom> symptoms;
+    
 }

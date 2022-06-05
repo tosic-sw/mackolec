@@ -26,4 +26,7 @@ public class Symptom {
 
     @OneToMany(mappedBy = "symptom")
     Set<ObservedSymptom> observedSymptoms;
+    
+    @ManyToMany(mappedBy = "symptoms")
+    private Set<Disease> diseases; 
 }
