@@ -1,17 +1,22 @@
-package events;
+package com.vet.mackolec.events;
 
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Role(Role.Type.EVENT)
 @Expires("5m")
-public class OxygenOutEvent {
+public class OxygenLevelEvent {
 	private Double oxygenLevel;
 	private String jmbm;
 
-	public OxygenOutEvent() {}
+	public OxygenLevelEvent() {}
 
-	public OxygenOutEvent(Double oxygenLevel) {
+	public OxygenLevelEvent(Double oxygenLevel) {
 		this.oxygenLevel = oxygenLevel;
 	}	
 	

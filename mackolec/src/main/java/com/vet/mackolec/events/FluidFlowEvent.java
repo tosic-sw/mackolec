@@ -1,8 +1,13 @@
-package events;
+package com.vet.mackolec.events;
 
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Role(Role.Type.EVENT)
 @Expires("1m")
 public class FluidFlowEvent {
@@ -15,21 +20,4 @@ public class FluidFlowEvent {
 		this.jmbm = jmbm;
 		this.fluidFlow = fluidFlow;
 	}
-
-	public double getFluidFlow() {
-		return fluidFlow;
-	}
-
-	public void setFluidFlow(double fluidFlow) {
-		this.fluidFlow = fluidFlow;
-	}
-
-	public String getJmbm() {
-		return jmbm;
-	}
-
-	public void setJmbm(String jmbm) {
-		this.jmbm = jmbm;
-	}
-	
 }

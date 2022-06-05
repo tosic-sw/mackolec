@@ -1,21 +1,22 @@
 package sbnz.integracija
 
-import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.HospitalizedCat;
 import com.vet.mackolec.models.AlarmNotification;
-
-// SREDI IMPORTE
-// DODATI KONTROLER I SERVIS DA BI SKRIPTE MOGLE DA GADJAJU
+import com.vet.mackolec.models.enums.NotificationType;
+import com.vet.mackolec.events.HeartBeatEvent;
+import com.vet.mackolec.events.OxygenLevelEvent;
+import com.vet.mackolec.events.FluidFlowEvent;
 
 rule "More than 35 beats in last minute"
     when
     	HospitalizedCat($cat: cat)
     	Number(intValue > 35) from accumulate (
-    		HeartBeatEvent(jmbm = $cat.jmbm) 
-            over window:time(60s)
+    		$hbe: HeartBeatEvent(jmbm == $cat.jmbm)
+            over window:time(60s),
+            count($hbe)
     	)
     then
-        insert(new AlarmNotification($cat.getJmbm(), "Cat has heart problems, possible heart attack!"));
+        // insert(new AlarmNotification($cat.getJmbm(), "Cat has heart problems, possible heart attack!"), NotificationType.HEART);
         // drools.halt();
 end
 
@@ -23,34 +24,22 @@ rule "Oxygen level less than 94% in last 3 minutes"
     when
     	HospitalizedCat($cat: cat)
     	not (
-    		OxygenOutEvent(jmbm = $cat.jmbm, oxygenLevel >= 94) 
+    		OxygenLevelEvent(jmbm == $cat.jmbm, oxygenLevel >= 94) 
     		over window:time(180s)
     	)
     then
-        insert(new AlarmNotification($cat.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!"));
+        // insert(new AlarmNotification($cat.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!"), NotificationType.OXYGEN);
         // drools.halt();
 end
 
-rule "Fluid level less than 1ml/s in last 40 seconds"
+rule "Problematic infusion fluid level in last 40 seconds"
     when
     	HospitalizedCat($cat: cat)
     	not (
-    		FluidEvent(jmbm = $cat.jmbm, fluidLevel < 1) 
+    		FluidFlowEvent(jmbm == $cat.jmbm, fluidFlow >= 1 && fluidFlow <= 12) 
     		over window:time(40s)
     	)
     then
-        insert(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!"));
-        // drools.halt();
-end
-
-rule "Fluid level more than 12ml/s in last 40 seconds"
-    when
-    	HospitalizedCat($cat: cat)
-    	not (
-    		FluidEvent(jmbm = $cat.jmbm, fluidLevel > 12) 
-    		over window:time(40s)
-    	)
-    then
-        insert(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!"));
+        // insert(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!"), NotificationType.FLUID);
         // drools.halt();
 end

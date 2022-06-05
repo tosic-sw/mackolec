@@ -1,14 +1,19 @@
-package events;
+package com.vet.mackolec.events;
 
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Role(Role.Type.EVENT)
 @Expires("1m")
-public class HartBeatEvent {
+public class HeartBeatEvent {
 	private String jmbm;
 	
-	public HartBeatEvent() {}
+	public HeartBeatEvent() {}
 	
 	public String getJmbm() {
 		return jmbm;

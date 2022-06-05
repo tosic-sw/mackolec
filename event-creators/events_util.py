@@ -1,6 +1,6 @@
 import random
 
-def generate_message(field_name, jmbm, value_min, value_max):
+def generate_message(jmbm, field_name=None, value_min=None, value_max=None):
     if field_name == None:
         return { "jmbm": jmbm }
     
