@@ -4,5 +4,6 @@ public enum CatAge {
     MACE,
     MLADA_MACKA,
     ODRASLA_MACKA,
-    STARA_MACKA
+    STARA_MACKA,
+    UNDEFINED
 }

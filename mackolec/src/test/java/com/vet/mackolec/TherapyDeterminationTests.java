@@ -20,6 +20,7 @@ import com.vet.mackolec.models.enums.TherapyStrength;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -36,7 +37,8 @@ public class TherapyDeterminationTests {
 	
 	 @Test
 	 public void therapyDetermination_MG100() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(2), new Integer(300), Breed.RUSKA, CatAge.MACE, Gender.MALE);

@@ -2,6 +2,10 @@
 <kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule" 
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    
+   <kbase name="default" packages="sbnz.integracija">
+        <ksession name="default-session" type="stateful"/>
+    </kbase>
+   
    <kbase name="cep" eventProcessingMode="stream" packages="sbnz.cep">
         <ksession name="cep-session" type="stateful"/>
     </kbase>
