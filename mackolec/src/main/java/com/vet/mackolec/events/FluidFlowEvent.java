@@ -16,7 +16,7 @@ public class FluidFlowEvent {
 	
 	public FluidFlowEvent() {}
 	
-	public FluidFlowEvent(Double fluidFlow, String jmbm) {
+	public FluidFlowEvent(String jmbm, Double fluidFlow) {
 		this.jmbm = jmbm;
 		this.fluidFlow = fluidFlow;
 	}

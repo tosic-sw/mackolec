@@ -15,11 +15,7 @@ public class HeartBeatEvent {
 	
 	public HeartBeatEvent() {}
 	
-	public String getJmbm() {
-		return jmbm;
-	}
-
-	public void setJmbm(String jmbm) {
+	public HeartBeatEvent(String jmbm) {
 		this.jmbm = jmbm;
 	}
 }

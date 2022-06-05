@@ -16,8 +16,9 @@ public class OxygenLevelEvent {
 
 	public OxygenLevelEvent() {}
 
-	public OxygenLevelEvent(Double oxygenLevel) {
+	public OxygenLevelEvent(String jmbm, Double oxygenLevel) {
 		this.oxygenLevel = oxygenLevel;
+		this.jmbm = jmbm;
 	}	
 	
 	public Double getOxygenLevel() {
