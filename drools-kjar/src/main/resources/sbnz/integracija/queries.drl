@@ -1,0 +1,99 @@
+package com.sample
+
+import com.vet.mackolec.models.*;
+import com.vet.mackolec.models.enums.*;
+
+
+import java.util.*;
+
+query "Cats that have acquired immunity to the drug they used" (Long $tresholdDate)
+	
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id, 
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 4) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+    
+end
+
+query "Cats at risk of organ damage - SREDNJE_JAK_LEK" (Long $tresholdDate)
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id, 
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 6) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+query "Cats at risk of organ damage - JAK_LEK" (Long $tresholdDate)
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id, 
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 6) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+query "Cats with possible chronic diseases" (Long $tresholdDate, String $diseaseName)
+	Cat($jmbm: jmbm)
+	Disease($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			disease.id == $id,
+			disease.name != $diseaseName,
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 4) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+
+/*
+query "Cat breeds that are most susceptible to disease"(List $breeds)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 4) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+*/

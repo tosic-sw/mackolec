@@ -69,4 +69,9 @@ public class Cat {
 
     @OneToMany(mappedBy = "cat")
     Set<Therapy> therapies;
+
+	@Override
+	public String toString() {
+		return "Cat [jmbm=" + jmbm + ", age=" + age + ", breed=" + breed + ", ageEnum=" + ageEnum + ", gender=" + gender + "]";
+	}
 }
