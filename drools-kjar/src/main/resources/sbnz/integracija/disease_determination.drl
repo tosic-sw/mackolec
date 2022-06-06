@@ -2,20 +2,9 @@ package sbnz.integracija
 
 import com.vet.mackolec.models.*
 
-global Double largestShare; // this is temp largest share of symptoms of current disease
-global Integer occuredSymptoms; // number of symptoms that occured in current disease
-
-rule "Initializee"
-	agenda-group "disease_determination"
-	salience 100
-	when
-	then
-		kcontext.getKieRuntime().setGlobal("largestShare", -1.0);
-		kcontext.getKieRuntime().setGlobal("occuredSymptoms", 0);
-end 
-
-
 rule "DiseaseDetermination"
+	salience (-((double) 100*$value / (double) $symptoms.size() + $value))
+	// we are looking for disese that contains most of observed symptoms
 	agenda-group "disease_determination"
     when 
     	$therapy: Therapy($observedSymptoms: observedSymptoms)
@@ -24,21 +13,11 @@ rule "DiseaseDetermination"
     	Number($value: intValue > 0) from accumulate(
         	$oS: ObservedSymptom(symptom memberOf $symptoms) from $observedSymptoms,
         	count($oS)
-        ) 
+        )
+        
     then
-    	double tempShare = (double)$value/(double)$symptoms.size();
-		if (tempShare > largestShare){
-			kcontext.getKieRuntime().setGlobal("largestShare", tempShare);
-			kcontext.getKieRuntime().setGlobal("occuredSymptoms", $value);
-			modify($therapy) { 
-    			setDisease((Disease) $disease)
-    		}
-		}
-		else if (tempShare == largestShare && $value > occuredSymptoms){
-			kcontext.getKieRuntime().setGlobal("occuredSymptoms", $value);
-			modify($therapy) { 
-    			setDisease((Disease) $disease)
-    		}
-		}
+    	modify($therapy) { 
+    		setDisease((Disease) $disease)
+    	}
     	delete($disease);
 end

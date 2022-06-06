@@ -14,6 +14,7 @@ import com.vet.mackolec.models.Therapy;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -30,7 +31,8 @@ public class DiseaseDeterminationTests {
 	
 	@Test
 	 public void diseaseDetermination() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
 		kieSession.getAgenda().getAgendaGroup("disease_determination").setFocus();
 		
 		Symptom symptom1 = new Symptom("slabost");
