@@ -27,7 +27,7 @@ public class HospitalizedCat {
     private Long date;
     
     @OneToOne
-    @JoinColumn(name = "cat_jmbm", nullable = false)
+    @JoinColumn(name = "cat_id", nullable = false)
 	private Cat cat;
 	
 	public HospitalizedCat() {}

@@ -1,6 +1,6 @@
 package com.vet.mackolec.services;
 
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +24,11 @@ public class AlarmNotificationServiceImpl implements AlarmNotificationService {
 	@Override
 	public Page<AlarmNotification> search(Pageable pageable) {
 		return alarmNotificationRepository.findAll(pageable);
+	}
+
+	@Override
+	public void saveAll(List<AlarmNotification> alarmNotifications) {
+		alarmNotificationRepository.saveAll(alarmNotifications);
 	}
 
 }

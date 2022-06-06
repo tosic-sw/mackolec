@@ -82,7 +82,7 @@ public class CepTests {
 		
 		kieSession.fireAllRules();
 		kieSession.dispose();
-		assertEquals(2, container.getNotifications().size());
+		assertEquals(1, container.getNotifications().size());
 	}
 	
 	@Test
@@ -189,7 +189,7 @@ public class CepTests {
 		
 		kieSession.fireAllRules();
 		kieSession.dispose();
-		assertEquals(2, container.getNotifications().size());
+		assertEquals(1, container.getNotifications().size());
 	}
 	
 	@Test
@@ -272,7 +272,7 @@ public class CepTests {
 		
 		kieSession.fireAllRules();
 		kieSession.dispose();
-		assertEquals(2, container.getNotifications().size());
+		assertEquals(1, container.getNotifications().size());
 	}
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketService } from 'src/modules/shared/services/socket.service';
 
 @Component({
   selector: 'app-root-layout-page',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
 })
 export class RootLayoutPageComponent {
 
-  constructor() { }
+  constructor(private webSocketService: SocketService) {}
+
+  connectSocket(): void {
+    this.webSocketService.connect();
+  }
+
 }

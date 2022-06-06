@@ -14,17 +14,11 @@ const routes: Routes = [
         component: WelcomePageComponent,
       }
     ]
-    //   {
-    //     path: "admin",
-    //     loadChildren: () =>
-    //       import("./../admin/admin.module").then((m) => m.AdminModule),
-    //   },
-    //   {
-    //     path: "user",
-    //     loadChildren: () =>
-    //       import("./../user/user.module").then((m) => m.UserModule),
-    //   }
-    // ]
+  },
+  {
+    path: "",
+    redirectTo: "my-app/welcome",
+    pathMatch: "full",
   },
   {
     path: "**",

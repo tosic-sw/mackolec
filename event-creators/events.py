@@ -31,17 +31,17 @@ def main():
         print("Server responded with status " + str(status))
 
 
-    # def cat4_hart(): 
-    #     field_name = "hartBeat"
-    #     request_body = generate_message("0004")
+    def cat4_hart_problem(): 
+        field_name = "heartBeat"
+        request_body = generate_message("0004")
 
-    #     status = post_data(request_body, field_name)
-    #     print("Server responded with status " + str(status))
+        status = post_data(request_body, field_name)
+        print("Server responded with status " + str(status))
 
-    every(2).seconds.do(cat1_hart)
-    every(5).seconds.do(cat2_oxygen)
-    every(5).seconds.do(cat3_infusion)
-    # every(0.5).seconds.do(job)
+    # every(2).seconds.do(cat1_hart)
+    # every(5).seconds.do(cat2_oxygen)
+    # every(5).seconds.do(cat3_infusion)
+    every(1).seconds.do(cat4_hart_problem)
 
     while True:
         run_pending()

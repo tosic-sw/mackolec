@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vet.mackolec.models.enums.NotificationType;
 
 import lombok.Getter;
@@ -21,6 +22,7 @@ import lombok.Setter;
 public class AlarmNotification {
 	
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=false)
     private Long id;

@@ -12,7 +12,7 @@ rule "More than 35 beats in last minute"
 	agenda-group "heart_beat"
     when
     	$container: AlarmNotificationContainer()
-    	HospitalizedCat($cat: cat)
+    	$hc: HospitalizedCat($cat: cat)
     	Number(intValue > 35) from accumulate (
     		$hbe: HeartBeatEvent(jmbm == $cat.jmbm)
             over window:time(60s),
@@ -20,14 +20,16 @@ rule "More than 35 beats in last minute"
     	)
     then
         System.out.println("ALARM RAISED FOR HEART BEAT " + $cat.getJmbm());
-        $container.addNotification(new AlarmNotification($cat.getJmbm(), "Cat has heart problems, possible heart attack!", NotificationType.HEART));
+        modify ($container) {
+        	addNotification(new AlarmNotification($cat.getJmbm(), "Cat has heart problems, possible heart attack!", NotificationType.HEART))
+        }
 end
 
 rule "Oxygen level less than 94% in last 3 minutes"
 	agenda-group "oxygen_level"
     when
     	$container: AlarmNotificationContainer()
-    	HospitalizedCat($cat: cat)
+    	$hc: HospitalizedCat($cat: cat)
     	not (
     		OxygenLevelEvent(jmbm == $cat.jmbm, oxygenLevel >= 94) 
     		over window:time(180s)
@@ -35,13 +37,15 @@ rule "Oxygen level less than 94% in last 3 minutes"
     then
     	System.out.println("ALARM RAISED FOR OXYGEN LEVEL " + $cat.getJmbm());
         $container.addNotification(new AlarmNotification($cat.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!", NotificationType.OXYGEN));
+		delete($hc);
+		delete($container);
 end
 
 rule "Problematic infusion fluid level in last 40 seconds"
 	agenda-group "fluid_level"
     when
     	$container: AlarmNotificationContainer()
-    	HospitalizedCat($cat: cat)
+    	$hc: HospitalizedCat($cat: cat)
     	not (
     		FluidFlowEvent(jmbm == $cat.jmbm, fluidFlow >= 1 && fluidFlow <= 12) 
     		over window:time(40s)
@@ -49,4 +53,6 @@ rule "Problematic infusion fluid level in last 40 seconds"
     then
     	System.out.println("ALARM RAISED FOR FLUID LEVEL " + $cat.getJmbm());
         $container.addNotification(new AlarmNotification($cat.getJmbm(), "Cat has infusion problem with fluid level!", NotificationType.FLUID));
+		delete($hc);
+		delete($container);
 end
