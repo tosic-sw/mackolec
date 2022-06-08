@@ -22,7 +22,7 @@ export class AlarmNotificationsPageComponent implements OnInit {
 
   constructor(private alarmNotificationService: NotificationService, private snackBarService: SnackBarService) { 
     this.notifications = [];
-    this.pageSize = 11;
+    this.pageSize = 10;
     this.currentPage = 1;
     this.totalSize = 1;
     this.notificationTypes = ['Heart', 'Oxygen', 'Fluid']

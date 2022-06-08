@@ -1,0 +1,48 @@
+<div class="heading">
+    <h1>Hospitalized cats</h1>
+</div>
+
+<div class="container">
+
+    <div class="row bott">
+        <div class="col-12">
+            <app-search-input-btn (searchBtnClicked)="search($event)"></app-search-input-btn>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="center" scope="col">Jmbm</th>
+                    <th class="center" scope="col">Name</th>
+                    <th class="center" scope="col">Date of hospitalization</th>
+                    <th class="center" scope="col">Age</th>
+                    <th class="center" scope="col">Weight</th>
+                    <th class="center" scope="col">Breed</th>
+                    <th class="center" scope="col">Gender</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hcat of hcats">
+                    <td class="center">{{hcat.jmbm}}</td>
+                    <td class="center">{{hcat.name}}</td>
+                    <td class="center">{{hcat.date | dateFormat: 'HH:mm DD.MM.YYYY'}}</td>
+                    <td class="center">{{hcat.age}}</td>
+                    <td class="center">{{hcat.weight}}</td>
+                    <td class="center">{{hcat.breed | upperFirstLetter}}</td>
+                    <td class="center">{{hcat.gender | upperFirstLetter}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <app-pagination [totalItems]="totalSize" [pageSize]="pageSize" (pageSelected)="changePage($event)"></app-pagination>
+        </div>
+    </div>
+
+</div>

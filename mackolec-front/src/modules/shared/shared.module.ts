@@ -6,12 +6,14 @@ import { SnackBarService } from './services/snack-bar.service';
 import { SocketService } from './services/socket.service';
 import { UtilService } from './services/util.service';
 import { DateFormatPipe } from './pipes/date-format.pipe';
+import { UpperFirstLetterPipe } from './pipes/upper-first-letter.pipe';
 
 
 
 @NgModule({
   declarations: [
-    DateFormatPipe
+    DateFormatPipe,
+    UpperFirstLetterPipe
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     MatTableModule
   ],
   exports: [
-    DateFormatPipe
+    DateFormatPipe, 
+    UpperFirstLetterPipe
   ],
   providers: [
     SnackBarService,

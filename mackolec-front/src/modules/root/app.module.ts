@@ -16,7 +16,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
-import { DateFormatPipe } from '../shared/pipes/date-format.pipe';
+import { HospitalizedCatsPageComponent } from './pages/hospitalized-cats-page/hospitalized-cats-page.component';
+import { SearchInputBtnComponent } from './components/search-input-btn/search-input-btn.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { DateFormatPipe } from '../shared/pipes/date-format.pipe';
     VetHeaderComponent,
     AlarmNotificationsPageComponent,
     SelectCustomTextComponent,
-    PaginationComponent
+    PaginationComponent,
+    HospitalizedCatsPageComponent,
+    SearchInputBtnComponent
   ],
   imports: [
     BrowserModule,

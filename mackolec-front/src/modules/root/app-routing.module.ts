@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlarmNotificationsPageComponent } from './pages/alarm-notifications-page/alarm-notifications-page.component';
+import { HospitalizedCatsPageComponent } from './pages/hospitalized-cats-page/hospitalized-cats-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RootLayoutPageComponent } from './pages/root-layout-page/root-layout-page.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: "notifications",
         component: AlarmNotificationsPageComponent,
+      },
+      {
+        path: "hospitalized-cats",
+        component: HospitalizedCatsPageComponent,
       }
     ]
   },
