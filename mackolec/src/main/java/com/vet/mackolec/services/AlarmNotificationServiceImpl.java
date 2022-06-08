@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.models.enums.NotificationType;
 import com.vet.mackolec.repositories.AlarmNotificationRepository;
 
 @Service
@@ -22,8 +23,11 @@ public class AlarmNotificationServiceImpl implements AlarmNotificationService {
 	}
 
 	@Override
-	public Page<AlarmNotification> search(Pageable pageable) {
-		return alarmNotificationRepository.findAll(pageable);
+	public Page<AlarmNotification> search(String notificationType, Pageable pageable) {
+		if(notificationType.equals(""))
+			return alarmNotificationRepository.findAll(pageable);
+		
+		return alarmNotificationRepository.findAllByNotificationType(NotificationType.valueOf(notificationType), pageable);
 	}
 
 	@Override

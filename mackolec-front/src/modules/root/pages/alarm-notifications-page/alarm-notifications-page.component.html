@@ -1,0 +1,39 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <app-select-custom-text placeholder="Type" [options]="notificationTypes" (optionSelected)=notificationTypeChanged($event) defaultOption="All"></app-select-custom-text>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="center" scope="col">Jmbm</th>
+                    <th class="center sira" scope="col">Message</th>
+                    <th class="center" scope="col">Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let notification of notifications">
+                    <td class="center">{{notification.jmbm}}</td>
+                    <td class="center sira">{{notification.message}}</td>
+                    <td class="center">{{notification.notificationType}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <app-pagination [totalItems]="totalSize" [pageSize]="pageSize" (pageSelected)="changePage($event)"></app-pagination>
+        </div>
+    </div>
+
+</div>
+
+
+

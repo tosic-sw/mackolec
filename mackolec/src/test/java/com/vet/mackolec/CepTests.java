@@ -2,7 +2,6 @@ package com.vet.mackolec;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.core.time.SessionPseudoClock;
@@ -17,12 +16,6 @@ import com.vet.mackolec.events.FluidFlowEvent;
 import com.vet.mackolec.events.HeartBeatEvent;
 import com.vet.mackolec.events.OxygenLevelEvent;
 import com.vet.mackolec.models.AlarmNotification;
-import com.vet.mackolec.models.Cat;
-import com.vet.mackolec.models.HospitalizedCat;
-import com.vet.mackolec.models.enums.Breed;
-import com.vet.mackolec.models.enums.CatAge;
-import com.vet.mackolec.models.enums.Gender;
-import com.vet.mackolec.models.helper.AlarmNotificationContainer;
 
 public class CepTests {
 

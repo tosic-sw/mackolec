@@ -13,5 +13,5 @@ public interface AlarmNotificationService {
 	
 	void saveAll(List<AlarmNotification> alarmNotifications);
 
-	Page<AlarmNotification> search(Pageable pageable);
+	Page<AlarmNotification> search(String notificationType, Pageable pageable);
 }

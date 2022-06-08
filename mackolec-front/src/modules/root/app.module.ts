@@ -9,6 +9,13 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { RootLayoutPageComponent } from './pages/root-layout-page/root-layout-page.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { VetHeaderComponent } from './components/vet-header/vet-header.component';
+import { AlarmNotificationsPageComponent } from './pages/alarm-notifications-page/alarm-notifications-page.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SelectCustomTextComponent } from './components/select-custom-text/select-custom-text.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -16,14 +23,22 @@ import { VetHeaderComponent } from './components/vet-header/vet-header.component
     RootLayoutPageComponent,
     NotFoundPageComponent,
     WelcomePageComponent,
-    VetHeaderComponent
+    VetHeaderComponent,
+    AlarmNotificationsPageComponent,
+    SelectCustomTextComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

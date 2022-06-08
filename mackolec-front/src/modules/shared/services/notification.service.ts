@@ -11,14 +11,15 @@ export class NotificationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findAll(username: string, page: number, size: number): Observable<HttpResponse<AlarmNotification[]>> {
+  findAll(notificationType: string, page: number, size: number): Observable<HttpResponse<AlarmNotification[]>> {
     let queryParams = {};
 
     queryParams = {
       headers: new HttpHeaders({ "Content-Type": 'application/json' }),
       observe: 'response',
       params: new HttpParams()
-        .set("page", String(page))
+        .set("notificationType", notificationType)
+        .append("page", String(page))
         .append("size", String(size))
         .append("sort", "id,desc")
     };
