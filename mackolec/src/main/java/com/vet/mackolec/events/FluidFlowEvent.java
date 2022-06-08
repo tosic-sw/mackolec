@@ -1,5 +1,7 @@
 package com.vet.mackolec.events;
 
+import java.io.Serializable;
+
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 
@@ -10,7 +12,9 @@ import lombok.Setter;
 @Setter
 @Role(Role.Type.EVENT)
 @Expires("1m")
-public class FluidFlowEvent {
+public class FluidFlowEvent implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private double fluidFlow;
 	private String jmbm;
 	

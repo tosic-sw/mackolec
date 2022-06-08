@@ -1,5 +1,7 @@
 package com.vet.mackolec.events;
 
+import java.io.Serializable;
+
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 
@@ -10,7 +12,9 @@ import lombok.Setter;
 @Setter
 @Role(Role.Type.EVENT)
 @Expires("5m")
-public class OxygenLevelEvent {
+public class OxygenLevelEvent implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Double oxygenLevel;
 	private String jmbm;
 

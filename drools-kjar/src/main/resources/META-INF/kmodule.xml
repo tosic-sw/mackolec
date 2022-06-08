@@ -7,6 +7,7 @@
     </kbase>
    
    <kbase name="cep" eventProcessingMode="stream" packages="sbnz.cep">
+        <ksession name="cep-session-pseudo" type="stateful" clockType="pseudo"/>
         <ksession name="cep-session" type="stateful"/>
     </kbase>
    

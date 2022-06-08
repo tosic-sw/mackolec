@@ -15,7 +15,7 @@ public class MackolecApplication {
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks.newKieContainer(ks.newReleaseId("sbnz.integracija", "drools-kjar", "0.0.1-SNAPSHOT"));
 		KieScanner kScanner = ks.newKieScanner(kContainer);
-		kScanner.start(2000);
+		kScanner.start(10_000);
 		return kContainer;
 	}
 	
