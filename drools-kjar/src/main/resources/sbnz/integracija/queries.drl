@@ -22,8 +22,7 @@ query "Cats that have acquired immunity to the drug they used" (Long $tresholdDa
     Number(intValue >= 4) from accumulate (
         $t: Therapy() from $therapies,
         count($t)
-    )
-    
+    )  
 end
 
 query "Cats at risk of organ damage - SREDNJE_JAK_LEK" (Long $tresholdDate)
@@ -33,7 +32,9 @@ query "Cats at risk of organ damage - SREDNJE_JAK_LEK" (Long $tresholdDate)
 	$therapies: List(size > 0) from collect (
 		Therapy(
 			cat.jmbm == $jmbm, 
-			medicine.id == $id, 
+			medicine.id == $id,
+			medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK,
+			therapyStrength.getValue() >= TherapyStrength.MG400.getValue(),
 			date >= $tresholdDate
 		)
     )
@@ -51,7 +52,9 @@ query "Cats at risk of organ damage - JAK_LEK" (Long $tresholdDate)
 	$therapies: List(size > 0) from collect (
 		Therapy(
 			cat.jmbm == $jmbm, 
-			medicine.id == $id, 
+			medicine.id == $id,
+			medicine.getCategory() == MedicineCategory.JAK_LEK, 
+			therapyStrength.getValue() >= TherapyStrength.MG300.getValue(),
 			date >= $tresholdDate
 		)
     )
@@ -62,7 +65,8 @@ query "Cats at risk of organ damage - JAK_LEK" (Long $tresholdDate)
     )
 end
 
-query "Cats with possible chronic diseases" (Long $tresholdDate, String $diseaseName)
+/*
+query "Cats with possible chronic diseases" (Long $tresholdDate)
 	Cat($jmbm: jmbm)
 	Disease($id: id)
 
@@ -70,7 +74,7 @@ query "Cats with possible chronic diseases" (Long $tresholdDate, String $disease
 		Therapy(
 			cat.jmbm == $jmbm, 
 			disease.id == $id,
-			disease.name != $diseaseName,
+			disease.name != "Dijabetes",
 			date >= $tresholdDate
 		)
     )
@@ -81,18 +85,14 @@ query "Cats with possible chronic diseases" (Long $tresholdDate, String $disease
     )
 end
 
-
-/*
-query "Cat breeds that are most susceptible to disease"(List $breeds)
+query "Cat breed average occurance in all therapies" (String $catBreed)
 
 	$therapies: List(size > 0) from collect (
-		Therapy(
-			date >= $tresholdDate
-		)
+		Therapy()
     )
     
-    Number(intValue >= 4) from accumulate (
-        $t: Therapy() from $therapies,
+    Number($value: intValue > 0) from accumulate (
+        Therapy($t:this, cat.breed.name() == $catBreed) from $therapies,
         count($t)
     )
 end

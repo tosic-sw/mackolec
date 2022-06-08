@@ -17,6 +17,8 @@ import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Gender;
 import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.enums.TherapyStrength;
+import com.vet.mackolec.models.helper.MostSusceptibleToDiseaseReport;
+import com.vet.mackolec.models.helper.ReportBreed;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,78 +44,76 @@ public class QueriesTests {
         kieContainer = kieServices.newKieContainer(kieServices.newReleaseId("sbnz.integracija", "drools-kjar", "0.0.1-SNAPSHOT"));
     }
 	
-	
 	@Test
-	 public void acquiredImmunityToTheDrug() {
+	public void acquiredImmunityToTheDrug() {
 	
 		KieSession kieSession = kieContainer.newKieSession();
 		
-	    Cat cat1 = createCat("123");
-	    Cat cat2 = createCat("124");
-	    
-
-	    Disease disease = new Disease();
-	    
-	    Medicine m1 = new Medicine("med1", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMaceAndMlada(), getUnsuitableForSkotska());
-		m1.setId(1L);
-	    Medicine m2 = new Medicine("med2", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMace(), getUnsuitableForRuskaAndSijamska());
-	    m2.setId(2L);
-	    Medicine m3 = new Medicine("med3", false, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForOdraslaAndStara(), getUnsuitableForRuska());
-	    m3.setId(3L);
-	    
-	    Therapy therapy1 = new Therapy();
-	    therapy1.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
-	    Therapy therapy2 = new Therapy();
-	    therapy2.setDate((new Date()).getTime() - SIX_MONTHS + 2*ONE_MONTH);
-	    Therapy therapy3 = new Therapy();
-	    therapy3.setDate((new Date()).getTime() - SIX_MONTHS + 3*ONE_MONTH);
-	    Therapy therapy4 = new Therapy();
-	    therapy4.setDate((new Date()).getTime() - 2*SIX_MONTHS - 2*ONE_MONTH);
-	    Therapy therapy5 = new Therapy();
-	    therapy5.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
+		Cat cat1 = createCat("123");
+		Cat cat2 = createCat("124");
 		
-	    Therapy therapy6 = new Therapy();
-	    therapy6.setDate((new Date()).getTime() - SIX_MONTHS + 4*ONE_MONTH);
-	    
-	    setCatAndMedicineToTherapy(therapy1, cat1, m1);
-	    setCatAndMedicineToTherapy(therapy2, cat1, m1);
-	    setCatAndMedicineToTherapy(therapy3, cat1, m1);
-	    setCatAndMedicineToTherapy(therapy4, cat1, m1);
-	    setCatAndMedicineToTherapy(therapy5, cat2, m2);
-	    setCatAndMedicineToTherapy(therapy6, cat1, m1);
-	    
-	    kieSession.insert(cat1);
-	    kieSession.insert(cat2);
-	    kieSession.insert(m1);
-	    kieSession.insert(m2);
-	    kieSession.insert(m3);
-	    kieSession.insert(therapy1);
-	    kieSession.insert(therapy2);
-	    kieSession.insert(therapy3);
-	    kieSession.insert(therapy4);
-	    kieSession.insert(therapy5);
-	    kieSession.insert(therapy6);
-	    
-	    
-	    QueryResults results = kieSession.getQueryResults("Cats that have acquired immunity to the drug they used", (new Date()).getTime() - TWELVE_MONTHS);
-	    System.out.println(results.size());
-
-	    assertEquals(1, results.size());
-	    
-	    List<Therapy> therapiesFound = new ArrayList<Therapy>();
-	    
-	    for (QueryResultsRow qResult : results) {
-	    	therapiesFound = (List<Therapy>) qResult.get("$therapies");
-	    	for (Therapy therapyRes : therapiesFound) {
-	    		System.out.println(therapyRes);
-	    	}
-	    }
-	    
-
-	    assertEquals(4, therapiesFound.size());
+		
+		Disease disease = new Disease();
+		
+		Medicine m1 = new Medicine("med1", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMaceAndMlada(), getUnsuitableForSkotska());
+		m1.setId(1L);
+		Medicine m2 = new Medicine("med2", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMace(), getUnsuitableForRuskaAndSijamska());
+		m2.setId(2L);
+		Medicine m3 = new Medicine("med3", false, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForOdraslaAndStara(), getUnsuitableForRuska());
+		m3.setId(3L);
+		
+		Therapy therapy1 = new Therapy();
+		therapy1.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
+		Therapy therapy2 = new Therapy();
+		therapy2.setDate((new Date()).getTime() - SIX_MONTHS + 2*ONE_MONTH);
+		Therapy therapy3 = new Therapy();
+		therapy3.setDate((new Date()).getTime() - SIX_MONTHS + 3*ONE_MONTH);
+		Therapy therapy4 = new Therapy();
+		therapy4.setDate((new Date()).getTime() - 2*SIX_MONTHS - 2*ONE_MONTH);
+		Therapy therapy5 = new Therapy();
+		therapy5.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
+		
+		Therapy therapy6 = new Therapy();
+		therapy6.setDate((new Date()).getTime() - SIX_MONTHS + 4*ONE_MONTH);
+		
+		setCatAndMedicineToTherapy(therapy1, cat1, m1);
+		setCatAndMedicineToTherapy(therapy2, cat1, m1);
+		setCatAndMedicineToTherapy(therapy3, cat1, m1);
+		setCatAndMedicineToTherapy(therapy4, cat1, m1);
+		setCatAndMedicineToTherapy(therapy5, cat2, m2);
+		setCatAndMedicineToTherapy(therapy6, cat1, m1);
+		
+		kieSession.insert(cat1);
+		kieSession.insert(cat2);
+		kieSession.insert(m1);
+		kieSession.insert(m2);
+		kieSession.insert(m3);
+		kieSession.insert(therapy1);
+		kieSession.insert(therapy2);
+		kieSession.insert(therapy3);
+		kieSession.insert(therapy4);
+		kieSession.insert(therapy5);
+		kieSession.insert(therapy6);
+		
+		
+		QueryResults results = kieSession.getQueryResults("Cats that have acquired immunity to the drug they used", (new Date()).getTime() - TWELVE_MONTHS);
+		System.out.println(results.size());
+		
+		assertEquals(1, results.size());
+		
+		List<Therapy> therapiesFound = new ArrayList<Therapy>();
+		
+		for (QueryResultsRow qResult : results) {
+			therapiesFound = (List<Therapy>) qResult.get("$therapies");
+			for (Therapy therapyRes : therapiesFound) {
+				System.out.println(therapyRes);
+			}
+		}
+		
+		
+		assertEquals(4, therapiesFound.size());
 	 
 	}
-	
 	
 	@Test
 	public void catsAtRiskOfOrganDamageSREDNJE() {
@@ -125,6 +125,7 @@ public class QueriesTests {
 	    
 
 	    Disease disease = new Disease();
+	    disease.setName("Upala mokracnih kanala");
 	    
 	    Medicine m1 = new Medicine("med1", true, false, MedicineCategory.SREDNJE_JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMaceAndMlada(), getUnsuitableForSkotska());
 		m1.setId(1L);
@@ -230,40 +231,50 @@ public class QueriesTests {
 	    Medicine m3 = new Medicine("med3", false, true, MedicineCategory.SLAB_LEK, new HashSet<Therapy>(), disease, getUnsuitableForOdraslaAndStara(), getUnsuitableForRuska());
 	    m3.setId(3L);
 	    
-	    Therapy therapy1 = new Therapy();
+		Therapy therapy1 = new Therapy();
 	    therapy1.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy1.setTherapyStrength(TherapyStrength.MG400);
+	    therapy1.setDisease(disease);
+		
 	    Therapy therapy2 = new Therapy();
 	    therapy2.setDate((new Date()).getTime() - 2*ONE_MONTH);
 	    therapy2.setTherapyStrength(TherapyStrength.MG400);
+	    therapy2.setDisease(disease);
+		
 	    Therapy therapy3 = new Therapy();
 	    therapy3.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy3.setTherapyStrength(TherapyStrength.MG400);
+	    therapy3.setDisease(disease);
+		
 	    Therapy therapy4 = new Therapy();
 	    therapy4.setDate((new Date()).getTime() - 2*SIX_MONTHS);
 	    therapy4.setTherapyStrength(TherapyStrength.MG400);
+	    therapy4.setDisease(disease);
+		
 	    Therapy therapy5 = new Therapy();
 	    therapy5.setDate((new Date()).getTime() - SIX_MONTHS - ONE_MONTH);
 	    therapy5.setTherapyStrength(TherapyStrength.MG400);
-		
-	    Therapy therapy6 = new Therapy();
+	    therapy5.setDisease(disease);
+	    
+		Therapy therapy6 = new Therapy();
 	    therapy6.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy6 .setTherapyStrength(TherapyStrength.MG400);
-	    
+	    therapy6.setDisease(disease);
 
-	    Therapy therapy7 = new Therapy();
+		Therapy therapy7 = new Therapy();
 	    therapy7.setDate((new Date()).getTime() - 2*ONE_MONTH);
 	    therapy7.setTherapyStrength(TherapyStrength.MG400);
-	    
+	    therapy7.setDisease(disease);
 
 	    Therapy therapy8 = new Therapy();
 	    therapy8.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy8.setTherapyStrength(TherapyStrength.MG400);
-	    
+	    therapy8.setDisease(disease);
 
 	    Therapy therapy9 = new Therapy();
 	    therapy9.setDate((new Date()).getTime() - 2*ONE_MONTH);
 	    therapy9.setTherapyStrength(TherapyStrength.MG400);
+	    therapy9.setDisease(disease);
 	    
 	    setCatAndMedicineToTherapy(therapy1, cat1, m1);
 	    setCatAndMedicineToTherapy(therapy2, cat1, m1);
@@ -379,7 +390,7 @@ public class QueriesTests {
 	    kieSession.insert(therapy7);
 	    
 	    
-	    QueryResults results = kieSession.getQueryResults("Cats with possible chronic diseases", (new Date()).getTime() - 2*TWELVE_MONTHS, "Dijabetes");
+	    QueryResults results = kieSession.getQueryResults("Cats with possible chronic diseases", (new Date()).getTime() - 2*TWELVE_MONTHS);
 	    System.out.println(results.size());
 	    
 	    assertEquals(1, results.size());
@@ -396,12 +407,83 @@ public class QueriesTests {
 	    assertEquals(4, therapiesFound.size());
 	 
 	}
+	
+	@Test
+	public void therapiesPerCatsBreed() {
+	
+		KieSession kieSession = kieContainer.newKieSession();
+		
+	    Cat cat1 = createCat("123");
+	    cat1.setBreed(Breed.RUSKA);
+	    Cat cat2 = createCat("124");
+	    cat2.setBreed(Breed.MAINE_COON);
+	    Cat cat3 = createCat("125");
+	    cat3.setBreed(Breed.SIBIRSKA);
+	    Cat cat4 = createCat("126");
+	    cat4.setBreed(Breed.SIJAMSKA);
+	    Cat cat5 = createCat("127");
+	    cat5.setBreed(Breed.SKOTSKA);
+	    
+		Therapy therapy1 = new Therapy();
+	    therapy1.setCat(cat1);
+		Therapy therapy2 = new Therapy();
+	    therapy2.setCat(cat2);
+		Therapy therapy3 = new Therapy();
+	    therapy3.setCat(cat3);
+		Therapy therapy4 = new Therapy();
+	    therapy4.setCat(cat4);
+		Therapy therapy5 = new Therapy();
+	    therapy5.setCat(cat5);
+		Therapy therapy6 = new Therapy();
+	    therapy6.setCat(cat4);
+		Therapy therapy7 = new Therapy();
+	    therapy7.setCat(cat3);
+		Therapy therapy8 = new Therapy();
+	    therapy8.setCat(cat2);
+		Therapy therapy9 = new Therapy();
+	    therapy9.setCat(cat1);
+		
+	    kieSession.insert(cat1);
+	    kieSession.insert(cat2);
+	    kieSession.insert(cat3);
+	    kieSession.insert(cat4);
+	    kieSession.insert(cat5);
+	    kieSession.insert(therapy1);
+	    kieSession.insert(therapy2);
+	    kieSession.insert(therapy3);
+	    kieSession.insert(therapy4);
+	    kieSession.insert(therapy5);
+	    kieSession.insert(therapy6);
+	    kieSession.insert(therapy7);
+	    kieSession.insert(therapy8);
+	    kieSession.insert(therapy9);
+	    
+//	    MostSusceptibleToDiseaseReport mstdr = new MostSusceptibleToDiseaseReport();
+	    List<ReportBreed> breeds = new ArrayList<ReportBreed>();
+	    breeds.add(new ReportBreed(Breed.RUSKA.name(), 0));
+	    breeds.add(new ReportBreed(Breed.SIJAMSKA.name(), 0));
+	    breeds.add(new ReportBreed(Breed.SIBIRSKA.name(), 0));
+	    breeds.add(new ReportBreed(Breed.MAINE_COON.name(), 0));
+	    breeds.add(new ReportBreed(Breed.SKOTSKA.name(), 0));
+//	    kieSession.insert(mstdr);
+	    
+	    for (ReportBreed reportBreed : breeds) {
+	    	QueryResults results = kieSession.getQueryResults("Cat breed average occurance in all therapies", reportBreed.getBreedName());
+	    	System.out.println("---------------------------------");
+	    	System.out.println(reportBreed.getBreedName());
+	    	System.out.println("Results size: " + results.size());
+	    	for (QueryResultsRow qResult : results) {
+	    		Integer numOfOccurances = (Integer) qResult.get("$avgOccurance");
+	    		System.out.println("Num of occurances " + numOfOccurances);
+	    	}
+	    }
+	 
+	}
 
 	private void setCatAndMedicineToTherapy(Therapy therapy, Cat cat, Medicine m) {
 		therapy.setCat(cat);
 		therapy.setMedicine(m);
 	}
-
 
 	private Cat createCat(String jmbm) {
 		 Cat cat = new Cat();
@@ -422,42 +504,42 @@ public class QueriesTests {
 		 return set;
 	 }
 	 
-	 private Set<CatAge> getUnsuitableForOdraslaAndStara() {
-		 Set<CatAge> set = new HashSet<>();
-		 set.add(CatAge.ODRASLA_MACKA);
-		 set.add(CatAge.STARA_MACKA);
-		 return set;
-	 }
+	private Set<CatAge> getUnsuitableForOdraslaAndStara() {
+		Set<CatAge> set = new HashSet<>();
+		set.add(CatAge.ODRASLA_MACKA);
+		set.add(CatAge.STARA_MACKA);
+		return set;
+	}
 	 
-	 private Set<CatAge> getUnsuitableForMace() {
-		 Set<CatAge> set = new HashSet<>();
-		 set.add(CatAge.MACE);
-		 return set;
-	 }
+	private Set<CatAge> getUnsuitableForMace() {
+		Set<CatAge> set = new HashSet<>();
+		set.add(CatAge.MACE);
+		return set;
+	}
 	 
-	 private Set<CatAge> getUnsuitableForMladaAndOdrasla() {
-		 Set<CatAge> set = new HashSet<>();
-		 set.add(CatAge.MLADA_MACKA);
-		 set.add(CatAge.ODRASLA_MACKA);
-		 return set;
-	 }
+	private Set<CatAge> getUnsuitableForMladaAndOdrasla() {
+		Set<CatAge> set = new HashSet<>();
+		set.add(CatAge.MLADA_MACKA);
+		set.add(CatAge.ODRASLA_MACKA);
+		return set;
+	}
 	 
-	 private Set<Breed> getUnsuitableForRuska() {
-		 Set<Breed> set = new HashSet<>();
-		 set.add(Breed.RUSKA);
-		 return set;
-	 }
+	private Set<Breed> getUnsuitableForRuska() {
+		Set<Breed> set = new HashSet<>();
+		set.add(Breed.RUSKA);
+		return set;
+	}
 	 
-	 private Set<Breed> getUnsuitableForRuskaAndSijamska() {
-		 Set<Breed> set = new HashSet<>();
-		 set.add(Breed.RUSKA);
-		 set.add(Breed.SIJAMSKA);
-		 return set;
-	 }
+	private Set<Breed> getUnsuitableForRuskaAndSijamska() {
+		Set<Breed> set = new HashSet<>();
+		set.add(Breed.RUSKA);
+		set.add(Breed.SIJAMSKA);
+		return set;
+	}
 	 
-	 private Set<Breed> getUnsuitableForSkotska() {
-		 Set<Breed> set = new HashSet<>();
-		 set.add(Breed.SKOTSKA);
-		 return set;
-	 }
+	private Set<Breed> getUnsuitableForSkotska() {
+		Set<Breed> set = new HashSet<>();
+		set.add(Breed.SKOTSKA);
+		return set;
+	}
 }
