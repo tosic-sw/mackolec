@@ -12,10 +12,10 @@ import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import com.vet.mackolec.events.AlarmNotificationEvent;
 import com.vet.mackolec.events.FluidFlowEvent;
 import com.vet.mackolec.events.HeartBeatEvent;
 import com.vet.mackolec.events.OxygenLevelEvent;
-import com.vet.mackolec.models.AlarmNotification;
 
 public class CepTests {
 
@@ -42,8 +42,8 @@ public class CepTests {
 		
 		kieSession.dispose();
 		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
-		AlarmNotification alarmNotification = (AlarmNotification) ans[0];
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
+		AlarmNotificationEvent alarmNotification = (AlarmNotificationEvent) ans[0];
 		assertEquals("001", alarmNotification.getJmbm());
 	}
 	
@@ -63,7 +63,7 @@ public class CepTests {
 		
 		kieSession.dispose();
 		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
 		assertEquals(0, ans.length);
 	}
 	
@@ -82,7 +82,7 @@ public class CepTests {
 		
 		kieSession.dispose();
 		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
 		assertEquals(0, ans.length);
 	}
 	
@@ -102,7 +102,7 @@ public class CepTests {
 		
 		kieSession.dispose();
 
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
 		assertEquals(0, ans.length);
 	}
 	
@@ -121,8 +121,8 @@ public class CepTests {
 		
 		kieSession.dispose();
 
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
-		AlarmNotification alarmNotification = (AlarmNotification) ans[0];
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
+		AlarmNotificationEvent alarmNotification = (AlarmNotificationEvent) ans[0];
 		assertEquals("001", alarmNotification.getJmbm());
 	}
 	
@@ -142,7 +142,7 @@ public class CepTests {
 		
 		kieSession.dispose();
 		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
 		assertEquals(0, ans.length);
 	}
 	
@@ -161,8 +161,8 @@ public class CepTests {
 		
 		kieSession.dispose();
 		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
-		AlarmNotification alarmNotification = (AlarmNotification) ans[0];
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
+		AlarmNotificationEvent alarmNotification = (AlarmNotificationEvent) ans[0];
 		assertEquals("001", alarmNotification.getJmbm());
 	}
 	

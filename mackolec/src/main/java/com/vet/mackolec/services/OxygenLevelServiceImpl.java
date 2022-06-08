@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.vet.mackolec.events.AlarmNotificationEvent;
 import com.vet.mackolec.events.OxygenLevelEvent;
 import com.vet.mackolec.exceptions.HospitalizedCatException;
-import com.vet.mackolec.models.AlarmNotification;
 import com.vet.mackolec.models.HospitalizedCat;
 import com.vet.mackolec.websocket.WebSocketService;
 
@@ -44,17 +44,19 @@ public class OxygenLevelServiceImpl implements OxygenLevelService {
 		kieSession.insert(oxygenLevelEvent);
 		kieSession.fireAllRules();
 		resetAgenda(kieSession, AGENDA);
-		
-		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotification.class)).toArray();
-		if(ans.length != 1) { // Rule didn't create alarm notification
+
+		Object[] ans = kieSession.getObjects(new ClassObjectFilter(AlarmNotificationEvent.class)).toArray();
+		if(ans.length == 0) { // Rule didn't create alarm notification
 			return;
 		}
 		
-		AlarmNotification alarmNotification = (AlarmNotification) ans[0];
-		alarmNotificationService.save(alarmNotification);
-		List<AlarmNotification> notifications = new ArrayList<AlarmNotification>();
-		notifications.add(alarmNotification);
-		webSocketService.sendNotifications(notifications);
+		AlarmNotificationEvent alarmNotification = (AlarmNotificationEvent) ans[0];
+		if(alarmNotification.getId() == null) {
+			alarmNotificationService.save(alarmNotification);
+			List<AlarmNotificationEvent> notifications = new ArrayList<AlarmNotificationEvent>();
+			notifications.add(alarmNotification);
+			webSocketService.sendNotifications(notifications);
+		}
 	}
 
 	@Override

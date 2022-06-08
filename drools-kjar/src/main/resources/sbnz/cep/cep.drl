@@ -1,12 +1,11 @@
 package sbnz.cep
 
 import com.vet.mackolec.models.HospitalizedCat;
-import com.vet.mackolec.models.AlarmNotification;
-import com.vet.mackolec.models.helper.AlarmNotificationContainer;
 import com.vet.mackolec.models.enums.NotificationType;
 import com.vet.mackolec.events.HeartBeatEvent;
 import com.vet.mackolec.events.OxygenLevelEvent;
 import com.vet.mackolec.events.FluidFlowEvent;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 
 rule "More than 35 beats in last minute"
 	agenda-group "heart_beat"
@@ -17,10 +16,10 @@ rule "More than 35 beats in last minute"
     		over window:time(60s),
             count($hbe2)
     	)
-    	not (AlarmNotification(jmbm == $hbe1.jmbm))
+    	not (AlarmNotificationEvent(jmbm == $hbe1.jmbm))
     then
         System.out.println("ALARM RAISED FOR HEART BEAT " + $hbe1.getJmbm());
-        insert(new AlarmNotification($hbe1.getJmbm(), "Cat has heart problems, possible heart attack!", NotificationType.HEART));
+        insert(new AlarmNotificationEvent($hbe1.getJmbm(), "Cat has heart problems, possible heart attack!", NotificationType.HEART));
 end
 
 rule "Oxygen level less than 94% in last 3 minutes"
@@ -31,10 +30,10 @@ rule "Oxygen level less than 94% in last 3 minutes"
     		OxygenLevelEvent(jmbm == $ole.jmbm, oxygenLevel >= 94) 
     		over window:time(180s)
     	)
-    	not (AlarmNotification(jmbm == $ole.jmbm))
+    	not (AlarmNotificationEvent(jmbm == $ole.jmbm))
     then
     	System.out.println("ALARM RAISED FOR OXYGEN LEVEL " + $ole.getJmbm());
-        insert(new AlarmNotification($ole.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!", NotificationType.OXYGEN));
+        insert(new AlarmNotificationEvent($ole.getJmbm(), "The cat is breathing hard, oxygen level is low! Possible suffocation!", NotificationType.OXYGEN));
 end
 
 rule "Problematic infusion fluid level in last 40 seconds"
@@ -45,8 +44,8 @@ rule "Problematic infusion fluid level in last 40 seconds"
     		FluidFlowEvent(jmbm == $fle.jmbm, fluidFlow >= 1 && fluidFlow <= 12) 
     		over window:time(40s)
     	)
-    	not (AlarmNotification(jmbm == $fle.jmbm))
+    	not (AlarmNotificationEvent(jmbm == $fle.jmbm))
     then
     	System.out.println("ALARM RAISED FOR FLUID LEVEL " + $fle.getJmbm());
-        insert(new AlarmNotification($fle.getJmbm(), "Cat has infusion problem with fluid level!", NotificationType.FLUID));
+        insert(new AlarmNotificationEvent($fle.getJmbm(), "Cat has infusion problem with fluid level!", NotificationType.FLUID));
 end

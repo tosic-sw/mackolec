@@ -36,8 +36,8 @@ export class SocketService {
       that.stompClient.subscribe('/socket-publisher', function (message: { body: string }) {
         // Showing message
         let notification = JSON.parse(message.body) as AlarmNotification;
-        console.log(notification);
-        that.snackBarService.openSnackBar("Ciao");
+        
+        that.snackBarService.openSnackBar(`JMBM:${notification.jmbm} - ${notification.message}`);
       });
 
     });

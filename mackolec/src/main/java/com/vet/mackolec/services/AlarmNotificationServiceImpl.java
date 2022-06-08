@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 import com.vet.mackolec.models.enums.NotificationType;
 import com.vet.mackolec.repositories.AlarmNotificationRepository;
 
@@ -18,12 +18,12 @@ public class AlarmNotificationServiceImpl implements AlarmNotificationService {
 	private AlarmNotificationRepository alarmNotificationRepository;
 	
 	@Override
-	public void save(AlarmNotification alarmNotification) {
+	public void save(AlarmNotificationEvent alarmNotification) {
 		alarmNotificationRepository.save(alarmNotification);
 	}
 
 	@Override
-	public Page<AlarmNotification> search(String notificationType, Pageable pageable) {
+	public Page<AlarmNotificationEvent> search(String notificationType, Pageable pageable) {
 		if(notificationType.equals(""))
 			return alarmNotificationRepository.findAll(pageable);
 		
@@ -31,7 +31,7 @@ public class AlarmNotificationServiceImpl implements AlarmNotificationService {
 	}
 
 	@Override
-	public void saveAll(List<AlarmNotification> alarmNotifications) {
+	public void saveAll(List<AlarmNotificationEvent> alarmNotifications) {
 		alarmNotificationRepository.saveAll(alarmNotifications);
 	}
 

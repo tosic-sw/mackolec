@@ -38,10 +38,18 @@ def main():
         status = post_data(request_body, field_name)
         print("Server responded with status " + str(status))
 
-    # every(2).seconds.do(cat1_hart)
-    # every(5).seconds.do(cat2_oxygen)
-    # every(5).seconds.do(cat3_infusion)
+    def cat5_oxygen_problem(): 
+        field_name = "oxygenLevel"
+        request_body = generate_message("0005", field_name, 92, 93)
+
+        status = post_data(request_body, field_name)
+        print("Server responded with status " + str(status))
+
+    every(2).seconds.do(cat1_hart)
+    every(5).seconds.do(cat2_oxygen)
+    every(5).seconds.do(cat3_infusion)
     every(1).seconds.do(cat4_hart_problem)
+    every(5).seconds.do(cat5_oxygen_problem)
 
     while True:
         run_pending()

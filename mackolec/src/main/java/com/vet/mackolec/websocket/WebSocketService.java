@@ -2,10 +2,10 @@ package com.vet.mackolec.websocket;
 
 import java.util.List;
 
-import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 
 public interface WebSocketService {
 
-	void sendNotifications(List<AlarmNotification> alarmNotifications);
+	void sendNotifications(List<AlarmNotificationEvent> alarmNotifications);
 	
 }

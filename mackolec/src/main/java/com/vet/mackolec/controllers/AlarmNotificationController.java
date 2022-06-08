@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 import com.vet.mackolec.services.AlarmNotificationService;
 import com.vet.mackolec.utils.ControllerUtils;
 
@@ -24,13 +24,13 @@ public class AlarmNotificationController {
     private AlarmNotificationService alarmNotificationService;
     
 	@GetMapping
-    public ResponseEntity<List<AlarmNotification>> search(@RequestParam("notificationType") String notificationType, Pageable pageable) {
+    public ResponseEntity<List<AlarmNotificationEvent>> search(@RequestParam("notificationType") String notificationType, Pageable pageable) {
         try {
-        	Page<AlarmNotification> alarmNotifications = alarmNotificationService.search(notificationType, pageable);
+        	Page<AlarmNotificationEvent> alarmNotifications = alarmNotificationService.search(notificationType, pageable);
             return new ResponseEntity<>(alarmNotifications.getContent(), ControllerUtils.createPageHeaderAttributes(alarmNotifications), HttpStatus.OK);
         } catch (Exception e) {
         	e.printStackTrace();
-            return new ResponseEntity<List<AlarmNotification>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<AlarmNotificationEvent>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

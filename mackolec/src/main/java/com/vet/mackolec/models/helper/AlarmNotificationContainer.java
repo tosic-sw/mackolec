@@ -1,6 +1,6 @@
 package com.vet.mackolec.models.helper;
 
-import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AlarmNotificationContainer {
 
-	private AlarmNotification notification;
+	private AlarmNotificationEvent notification;
 
 	public AlarmNotificationContainer() {}
 	

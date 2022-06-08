@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import com.vet.mackolec.models.AlarmNotification;
+import com.vet.mackolec.events.AlarmNotificationEvent;
 
 @Service
 public class WebSocketServiceImpl implements WebSocketService {
@@ -17,8 +17,8 @@ public class WebSocketServiceImpl implements WebSocketService {
     private SimpMessagingTemplate simpMessagingTemplate;
 	
 	@Override
-	public void sendNotifications(List<AlarmNotification> alarmNotifications) {
-		for(AlarmNotification an : alarmNotifications) {
+	public void sendNotifications(List<AlarmNotificationEvent> alarmNotifications) {
+		for(AlarmNotificationEvent an : alarmNotifications) {
             Map<String, String> message = new HashMap<>();
             message.put("message", an.getMessage());
             message.put("jmbm", an.getJmbm());

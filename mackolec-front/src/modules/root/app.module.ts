@@ -16,6 +16,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { DateFormatPipe } from '../shared/pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

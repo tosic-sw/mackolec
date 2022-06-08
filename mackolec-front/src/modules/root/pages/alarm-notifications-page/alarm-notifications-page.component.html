@@ -13,6 +13,7 @@
                   <tr>
                     <th class="center" scope="col">Jmbm</th>
                     <th class="center sira" scope="col">Message</th>
+                    <th class="center" scope="col">Timestamp</th>
                     <th class="center" scope="col">Type</th>
                   </tr>
                 </thead>
@@ -20,6 +21,7 @@
                   <tr *ngFor="let notification of notifications">
                     <td class="center">{{notification.jmbm}}</td>
                     <td class="center sira">{{notification.message}}</td>
+                    <td class="center sira">{{notification.dateTime | dateFormat: 'HH:mm DD.MM.YYYY'}}</td>
                     <td class="center">{{notification.notificationType}}</td>
                   </tr>
                 </tbody>

@@ -1,4 +1,6 @@
-package com.vet.mackolec.models;
+package com.vet.mackolec.events;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.kie.api.definition.type.Expires;
+import org.kie.api.definition.type.Role;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vet.mackolec.models.enums.NotificationType;
 
@@ -17,9 +22,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Role(Role.Type.EVENT)
+@Expires("30s")
 @Entity
 @Table(name = "alarm_notification")
-public class AlarmNotification {
+public class AlarmNotificationEvent {
 	
     @Id
     @JsonIgnore
@@ -33,16 +40,20 @@ public class AlarmNotification {
     @Column(name = "message", nullable=false)
 	private String message;
     
+    @Column(name = "dateTime", nullable=false)
+    private Long dateTime;
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "notificationType", nullable=false)
 	private NotificationType notificationType;
 
-	public AlarmNotification() {}
+	public AlarmNotificationEvent() {}
 
-	public AlarmNotification(String jmbm, String message, NotificationType notificationType) {
+	public AlarmNotificationEvent(String jmbm, String message, NotificationType notificationType) {
 		this.jmbm = jmbm;
 		this.message = message;
 		this.notificationType = notificationType; 
+		this.dateTime = new Date().getTime();
 	}
 	
 }
