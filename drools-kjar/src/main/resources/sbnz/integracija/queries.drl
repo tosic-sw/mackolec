@@ -1,0 +1,98 @@
+package sbnz.integracija
+
+import com.vet.mackolec.models.Cat;
+import com.vet.mackolec.models.Disease;
+import com.vet.mackolec.models.Therapy;
+
+import com.vet.mackolec.models.enums.MedicineCategory;
+import com.vet.mackolec.models.enums.TherapyStrength;
+
+query "cats_acquired_immunity_to_the_drug" (Long $tresholdDate)
+	
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id, 
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 4) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )  
+end
+
+query "cats_at_risk_of_organ_damage_SREDNJE_JAK_LEK" (Long $tresholdDate)
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id,
+			medicine.getCategory() == MedicineCategory.SREDNJE_JAK_LEK,
+			therapyStrength.getValue() >= TherapyStrength.MG400.getValue(),
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 6) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+query "cats_at_risk_of_organ_damage_JAK_LEK" (Long $tresholdDate)
+	Cat($jmbm: jmbm)
+	Medicine($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			medicine.id == $id,
+			medicine.getCategory() == MedicineCategory.JAK_LEK, 
+			therapyStrength.getValue() >= TherapyStrength.MG300.getValue(),
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 6) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+query "cats_with_possible_chronic_diseases" (Long $tresholdDate)
+	Cat($jmbm: jmbm)
+	Disease($id: id)
+
+	$therapies: List(size > 0) from collect (
+		Therapy(
+			cat.jmbm == $jmbm, 
+			disease.id == $id,
+			disease.name != "Dijabetes",
+			date >= $tresholdDate
+		)
+    )
+    
+    Number(intValue >= 4) from accumulate (
+        $t: Therapy() from $therapies,
+        count($t)
+    )
+end
+
+query "cat_breed_avg_occ_in_therapies" (String $catBreed)
+
+	$therapies: List(size > 0) from collect (
+		Therapy()
+    )
+    
+    Number($value: intValue > 0) from accumulate (
+        Therapy($t:this, cat.breed.name() == $catBreed) from $therapies,
+        count($t)
+    )
+end

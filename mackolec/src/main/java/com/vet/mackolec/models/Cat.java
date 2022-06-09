@@ -80,4 +80,9 @@ public class Cat {
     	this.breed = Breed.valueOf(catInfo.getBreed());
     	this.gender = Gender.valueOf(catInfo.getGender());
     }
+
+	@Override
+	public String toString() {
+		return "Cat [jmbm=" + jmbm + ", age=" + age + ", breed=" + breed + ", ageEnum=" + ageEnum + ", gender=" + gender + "]";
+	}
 }

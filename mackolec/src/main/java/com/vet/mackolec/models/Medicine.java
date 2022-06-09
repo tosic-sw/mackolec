@@ -58,4 +58,12 @@ public class Medicine {
     @CollectionTable(name = "medicine_unsuitable_breed", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     Set<Breed> unsuitableForBreed;
+
+	@Override
+	public String toString() {
+		return "Medicine [id=" + id + ", name=" + name + ", femaleFit=" + femaleFit + ", maleFit=" + maleFit
+				+ ", category=" + category + "]";
+	}
+    
+    
 }
