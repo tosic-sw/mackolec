@@ -15,7 +15,7 @@ import { HospitalizationPipe } from './pipes/hospitalization.pipe';
   declarations: [
     DateFormatPipe,
     UpperFirstLetterPipe,
-    HospitalizationPipe
+    HospitalizationPipe  
   ],
   imports: [
     CommonModule,
