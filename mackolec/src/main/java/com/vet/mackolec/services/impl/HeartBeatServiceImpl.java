@@ -1,19 +1,22 @@
-package com.vet.mackolec.services;
+package com.vet.mackolec.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.vet.mackolec.events.AlarmNotificationEvent;
+import com.vet.mackolec.events.HeartBeatEvent;
+import com.vet.mackolec.exceptions.HospitalizedCatException;
+import com.vet.mackolec.models.HospitalizedCat;
+import com.vet.mackolec.services.AlarmNotificationService;
+import com.vet.mackolec.services.HeartBeatService;
+import com.vet.mackolec.services.HospitalizedCatService;
+import com.vet.mackolec.websocket.WebSocketService;
 
 import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.vet.mackolec.events.AlarmNotificationEvent;
-import com.vet.mackolec.events.HeartBeatEvent;
-import com.vet.mackolec.exceptions.HospitalizedCatException;
-import com.vet.mackolec.models.HospitalizedCat;
-import com.vet.mackolec.websocket.WebSocketService;
 
 @Service
 public class HeartBeatServiceImpl implements HeartBeatService {

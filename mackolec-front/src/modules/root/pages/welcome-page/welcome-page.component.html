@@ -1,4 +1,13 @@
-<div style="text-align: center;">
-    <h1>WELCOME TO VET STATION</h1>
-    <button class="btn btn-success" (click)="gretting()"> Greeting from backend </button>
+<div>
+    <div style="text-align: center;">
+        <h1>WELCOME TO VET STATION</h1>
+    </div>
+    <mat-tab-group mat-align-tabs="center" [(selectedIndex)]=currentTab>
+        <mat-tab label="Symptoms">
+            <app-symptoms (symptomsEvent)="symptomsDTO($event)"></app-symptoms>
+        </mat-tab>
+        <mat-tab label="Cat informations">
+            <app-general-about-cat (catInfoEvent)="catInfo($event)"></app-general-about-cat>
+        </mat-tab>
+    </mat-tab-group>
 </div>

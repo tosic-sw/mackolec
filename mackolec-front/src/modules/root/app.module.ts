@@ -15,9 +15,13 @@ import { SelectCustomTextComponent } from './components/select-custom-text/selec
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { HospitalizedCatsPageComponent } from './pages/hospitalized-cats-page/hospitalized-cats-page.component';
 import { SearchInputBtnComponent } from './components/search-input-btn/search-input-btn.component';
+import { SymptomsComponent } from './components/symptoms/symptoms.component';
+import { MaterialExampleModule } from 'src/material.module';
+import { GeneralAboutCatComponent } from './components/general-about-cat/general-about-cat.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { SearchInputBtnComponent } from './components/search-input-btn/search-in
     SelectCustomTextComponent,
     PaginationComponent,
     HospitalizedCatsPageComponent,
-    SearchInputBtnComponent
+    SearchInputBtnComponent,
+    SymptomsComponent,
+    GeneralAboutCatComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import { SearchInputBtnComponent } from './components/search-input-btn/search-in
     FormsModule,
     MatSelectModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MaterialExampleModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

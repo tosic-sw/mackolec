@@ -1,0 +1,10 @@
+<div class="symptoms-content">
+    <ul class="row">
+        <li class="col-3" *ngFor="let symptom of symptoms" style="list-style-type: none;">
+            <label>{{symptom.name}}</label><br>
+            <mat-slider thumbLabel min="0" max="5" step="1" (change)="updateIntensity($event, symptom)">
+            </mat-slider>
+        </li>
+    </ul>
+    <button id="next-button" class="btn btn-success" (click)="sendSymptoms()">CONFIRM</button>
+</div>

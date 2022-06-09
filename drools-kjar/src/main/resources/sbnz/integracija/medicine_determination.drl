@@ -20,7 +20,7 @@ rule "MedicineDetermination"
 
     	$medicineList: List(size > 0) from collect (
     		Medicine(
-    			(disease == $disease) && 
+    			(disease.name == $disease.name) && 
     			!(unsuitableForAge contains $cat.ageEnum) && 
     			!(unsuitableForBreed contains $cat.breed) && 
     			isSuitableForGender(maleFit, femaleFit, $cat.gender)

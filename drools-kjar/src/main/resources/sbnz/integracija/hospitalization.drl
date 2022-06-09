@@ -8,11 +8,11 @@ import java.util.*;
 
 global Double THRESHOLD; // hospitalization mean symptoms intensity treshold
 
-function double calculateMeanIntensity(List observedSymptoms) {
+function double calculateMeanIntensity(Set observedSymptoms) {
 	double sumOfIntesity = 0.0;
-	for (int i = 0; i < observedSymptoms.size(); i++) 
+	for (Object element: observedSymptoms)
 	{ 
-	    sumOfIntesity += ((ObservedSymptom) observedSymptoms.get(i)).getLevel();
+	    sumOfIntesity += ((ObservedSymptom) element).getLevel();
 	}
 	return sumOfIntesity / observedSymptoms.size();
 }
@@ -25,23 +25,22 @@ rule "Initialize"
 		kcontext.getKieRuntime().setGlobal("THRESHOLD", 3.7);
 end 
 
-
 rule "Hospitalization - based intensity of sypmtoms -- NEED"
 	agenda-group "hospitalization"
     when 
-    	$observation: CatSymptomsObservation(observedSymptoms != null, observedSymptoms.size() != 0, hospitalization == Hospitalization.UNDEFINED)
-    	eval(calculateMeanIntensity($observation.getObservedSymptoms()) > THRESHOLD)
+    	$therapy: Therapy($observedSymptoms: observedSymptoms, hospitalization == Hospitalization.UNDEFINED)
+    	eval(calculateMeanIntensity($therapy.getObservedSymptoms()) > THRESHOLD)
     then 
-    	$observation.setHospitalization(Hospitalization.NEED);
+    	$therapy.setHospitalization(Hospitalization.NEED);
 end
 
 
 rule "Hospitalization - based intensity of sypmtoms -- NO_NEED"
 	agenda-group "hospitalization"
     when 
-    	$observation: CatSymptomsObservation(observedSymptoms != null, observedSymptoms.size() != 0, hospitalization == Hospitalization.UNDEFINED)
-    	eval(calculateMeanIntensity($observation.getObservedSymptoms()) <= THRESHOLD)
+    	$therapy: Therapy($observedSymptoms: observedSymptoms, hospitalization == Hospitalization.UNDEFINED)
+    	eval(calculateMeanIntensity($therapy.getObservedSymptoms()) <= THRESHOLD)
     then 
-    	$observation.setHospitalization(Hospitalization.NO_NEED);
+    	$therapy.setHospitalization(Hospitalization.NO_NEED);
 end
 
