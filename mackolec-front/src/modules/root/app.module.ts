@@ -9,6 +9,10 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { RootLayoutPageComponent } from './pages/root-layout-page/root-layout-page.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { VetHeaderComponent } from './components/vet-header/vet-header.component';
+import { SymptomsComponent } from './components/symptoms/symptoms.component';
+import { MaterialExampleModule } from 'src/material.module';
+import { GeneralAboutCatComponent } from './components/general-about-cat/general-about-cat.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,14 +20,18 @@ import { VetHeaderComponent } from './components/vet-header/vet-header.component
     RootLayoutPageComponent,
     NotFoundPageComponent,
     WelcomePageComponent,
-    VetHeaderComponent
+    VetHeaderComponent,
+    SymptomsComponent,
+    GeneralAboutCatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MaterialExampleModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
