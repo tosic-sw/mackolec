@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -32,7 +33,8 @@ public class MedicineDeterminationTests {
 	
 	 @Test
 	 public void medicationDetermination() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession(); 
 		kieSession.getAgenda().getAgendaGroup("medicine_determination").setFocus();
 		
 	    Cat cat = createCat();
@@ -46,15 +48,15 @@ public class MedicineDeterminationTests {
 	    kieSession.insert(therapy);
 	    kieSession.fireAllRules();
 	    
-	    assertEquals("med4", therapy.getMedicine().getName());
+	    assertEquals("Vetoquinol", therapy.getMedicine().getName());
 	    }
 	 
 	 private Cat createCat() {
 		 Cat cat = new Cat();
-		 cat.setName("");
-	     cat.setAge(2);
-	     cat.setAgeEnum(CatAge.MACE);
-	     cat.setBreed(Breed.RUSKA);
+		 cat.setName("Macka");
+	     cat.setAge(4);
+	     cat.setAgeEnum(CatAge.MLADA_MACKA);
+	     cat.setBreed(Breed.SKOTSKA);
 	     cat.setGender(Gender.MALE);
 		 
 		 return cat;
@@ -63,11 +65,11 @@ public class MedicineDeterminationTests {
 	 private Set<Medicine> createMedicine(Disease disease) {
 		 Set<Medicine> medicine = new HashSet<Medicine>();
 		 
-		 Medicine m1 = new Medicine("med1", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMaceAndMlada(), getUnsuitableForSkotska());
-		 Medicine m2 = new Medicine("med2", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMace(), getUnsuitableForRuskaAndSijamska());
-		 Medicine m3 = new Medicine("med3", false, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForOdraslaAndStara(), getUnsuitableForRuska());
-		 Medicine m4 = new Medicine("med4", false, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMladaAndOdrasla(), getUnsuitableForSkotska());
-		 Medicine m5 = new Medicine("med5", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, getUnsuitableForMladaAndOdrasla(), getUnsuitableForSkotska());
+		 Medicine m1 = new Medicine("Veto", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, new HashSet<CatAge>(), new HashSet<Breed>());
+		 Medicine m2 = new Medicine("Vetoquinol", true, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, new HashSet<CatAge>(), getUnsuitableForRuskaAndSijamska());
+		 Medicine m3 = new Medicine("Stomodine", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, new HashSet<CatAge>(), new HashSet<Breed>());
+		 Medicine m4 = new Medicine("OZ", false, true, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, new HashSet<CatAge>(), new HashSet<Breed>());
+		 Medicine m5 = new Medicine("Stomodine Adv", true, false, MedicineCategory.JAK_LEK, new HashSet<Therapy>(), disease, new HashSet<CatAge>(), new HashSet<Breed>());
 		 
 		 medicine.add(m1);
 		 medicine.add(m2);

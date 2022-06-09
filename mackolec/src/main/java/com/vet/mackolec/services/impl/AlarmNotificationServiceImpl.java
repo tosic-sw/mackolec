@@ -1,4 +1,4 @@
-package com.vet.mackolec.services;
+package com.vet.mackolec.services.impl;
 
 
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.vet.mackolec.models.AlarmNotification;
 import com.vet.mackolec.repositories.AlarmNotificationRepository;
+import com.vet.mackolec.services.AlarmNotificationService;
 
 @Service
 public class AlarmNotificationServiceImpl implements AlarmNotificationService {

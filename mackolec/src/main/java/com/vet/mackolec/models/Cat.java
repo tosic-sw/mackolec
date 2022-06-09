@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.vet.mackolec.models.dto.CatInfoDTO;
+import com.vet.mackolec.models.dto.ObservedCatDTO;
 import com.vet.mackolec.models.enums.Breed;
 import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Gender;
@@ -59,7 +61,7 @@ public class Cat {
     
     @NonNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "age_enum", nullable=false)
+    @Column(name = "age_enum")
     private CatAge ageEnum;
 
     @NonNull
@@ -69,4 +71,13 @@ public class Cat {
 
     @OneToMany(mappedBy = "cat")
     Set<Therapy> therapies;
+    
+    public Cat(CatInfoDTO catInfo) {
+    	this.jmbm = catInfo.getJmbm();
+    	this.name = catInfo.getName();
+    	this.age = catInfo.getAge();
+    	this.weight = catInfo.getWeight();
+    	this.breed = Breed.valueOf(catInfo.getBreed());
+    	this.gender = Gender.valueOf(catInfo.getGender());
+    }
 }

@@ -1,4 +1,4 @@
-package com.vet.mackolec.services;
+package com.vet.mackolec.services.impl;
 
 import javax.annotation.PostConstruct;
 
@@ -8,6 +8,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import com.vet.mackolec.events.FluidFlowEvent;
+import com.vet.mackolec.services.FluidFlowService;
 
 public class FluidFlowServiceImpl implements FluidFlowService {
 

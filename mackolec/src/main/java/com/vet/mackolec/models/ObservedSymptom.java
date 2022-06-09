@@ -1,14 +1,22 @@
 package com.vet.mackolec.models;
 
 
-import lombok.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 @Table(name = "observed_symptom")
 public class ObservedSymptom {
@@ -18,17 +26,16 @@ public class ObservedSymptom {
     @Column(name="id", unique=true, nullable=false)
     private Long id;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "symptomId")
     private Symptom symptom;
     
-    @NonNull
     @Column(name="level")
     private Double level;
 
-    @ManyToOne
-    @JoinColumn(name = "therapyId")
-    private Therapy therapy;
+    public ObservedSymptom(Symptom symptom, Double level) {
+    	this.symptom = symptom;
+    	this.level = level;
+    }
 }
 

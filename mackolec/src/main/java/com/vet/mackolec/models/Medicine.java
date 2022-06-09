@@ -44,7 +44,7 @@ public class Medicine {
     
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "diseaseId")
+    @JoinColumn(name = "disease_id")
     private Disease disease;
 
     @NonNull
