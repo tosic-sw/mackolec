@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vet.mackolec.dto.HospitalizedCatDTO;
 import com.vet.mackolec.models.HospitalizedCat;
+import com.vet.mackolec.models.dto.HospitalizedCatDTO;
 import com.vet.mackolec.services.HospitalizedCatService;
 import com.vet.mackolec.utils.ControllerUtils;
 
@@ -32,7 +32,7 @@ public class HospitalizedCatController {
 			List<HospitalizedCatDTO> hcats = new ArrayList<HospitalizedCatDTO>();
 			hcatsPage.getContent().forEach((hcat) -> hcats.add(new HospitalizedCatDTO(hcat)));
 			
-            return new ResponseEntity<>(hcats,  ControllerUtils.createPageHeaderAttributes(hcatsPage), HttpStatus.CREATED);
+            return new ResponseEntity<>(hcats,  ControllerUtils.createPageHeaderAttributes(hcatsPage), HttpStatus.OK);
         } catch (Exception e) {
         	e.printStackTrace();
         	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

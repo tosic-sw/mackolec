@@ -1,5 +1,6 @@
 package com.vet.mackolec.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vet.mackolec.dto.HospitalizedCatDTO;
 import com.vet.mackolec.models.Therapy;
+import com.vet.mackolec.models.dto.TherapyDTO;
 import com.vet.mackolec.services.TherapyService;
 import com.vet.mackolec.utils.ControllerUtils;
 
@@ -25,13 +26,13 @@ public class TherapyController {
 	private TherapyService therapyService;
 	
 	@GetMapping(consumes = "application/json")
-    public ResponseEntity<List<HospitalizedCatDTO>> search(@RequestParam("search") String search, Pageable pageable) {
+    public ResponseEntity<List<TherapyDTO>> search(@RequestParam("search") String search, Pageable pageable) {
 		try {
 			Page<Therapy> therapiesPage = therapyService.search(search, pageable);
-			// List<TherapyDTO> therapiesDTO= new ArrayList<TherapyDTO>();
-			// therapiesPage.getContent().forEach((therapy) -> therapiesDTO.add(new TherapyDTO(therapy)));
+			List<TherapyDTO> therapiesDTO= new ArrayList<TherapyDTO>();
+			therapiesPage.getContent().forEach((therapy) -> therapiesDTO.add(new TherapyDTO(therapy)));
 			
-            return new ResponseEntity<>(null,  ControllerUtils.createPageHeaderAttributes(therapiesPage), HttpStatus.CREATED);
+            return new ResponseEntity<>(therapiesDTO,  ControllerUtils.createPageHeaderAttributes(therapiesPage), HttpStatus.OK);
         } catch (Exception e) {
         	e.printStackTrace();
         	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

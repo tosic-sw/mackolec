@@ -1,0 +1,108 @@
+<div class="heading">
+    <h2>Therapy details</h2>
+</div>
+
+<hr>
+
+<div class="container heading">
+    
+    <div class="row">
+
+        <div class="col">
+
+            <div class="row bott">
+                <div class="col">
+                    <div class="heading">
+                        <h4>Current cat info</h4>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row bott">
+                <div class="col">
+                    <p><b>Jmbm:</b> {{data.cat.jmbm}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Name:</b> {{data.cat.name}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Breed:</b> {{data.cat.breed | upperFirstLetter}}</p>
+                </div>
+            </div>
+        
+            <div class="row bott">
+                <div class="col">
+                    <p><b>Age:</b> {{data.cat.age}} months</p>
+                </div>
+                <div class="col">
+                    <p><b>Gender:</b> {{data.cat.gender | upperFirstLetter}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Weight:</b> {{data.cat.weight}}g</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col">
+    
+            <div class="row">
+                <div class="col">
+                    <div class="heading">
+                        <h4>Cat info at therapy time</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p><b>Age:</b> {{data.catAge}} months</p>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <p><b>Weight:</b> {{data.catWeight}}g</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="heading">
+                <h4>Symptoms</h4>
+            </div>
+            <table class="table table-hover table-bordered border-dark">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="center" scope="col">Symptom</th>
+                    <th class="center" scope="col">Intensity</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let symptom of data.observedSymptoms">
+                    <td class="center">{{symptom.name}}</td>
+                    <td class="center">{{symptom.intensity}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p><b>Hospitalization:</b> {{data.hospitalization | hospitalization}}</p>
+        </div>
+        <div class="col">
+            <p><b>Therapy strength:</b> {{data.therapyStrength}}</p>
+        </div>
+        <div class="col">
+            <p><b>Date:</b> {{data.date | dateFormat: 'HH:mm DD.MM.YYYY'}}</p>
+        </div>
+    </div>
+
+    <hr>
+
+</div>
+
