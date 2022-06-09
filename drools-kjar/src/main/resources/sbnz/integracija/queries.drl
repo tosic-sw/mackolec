@@ -1,12 +1,13 @@
-package com.sample
+package sbnz.integracija
 
-import com.vet.mackolec.models.*;
-import com.vet.mackolec.models.enums.*;
+import com.vet.mackolec.models.Cat;
+import com.vet.mackolec.models.Disease;
+import com.vet.mackolec.models.Therapy;
 
+import com.vet.mackolec.models.enums.MedicineCategory;
+import com.vet.mackolec.models.enums.TherapyStrength;
 
-import java.util.*;
-
-query "Cats that have acquired immunity to the drug they used" (Long $tresholdDate)
+query "cats_acquired_immunity_to_the_drug" (Long $tresholdDate)
 	
 	Cat($jmbm: jmbm)
 	Medicine($id: id)
@@ -25,7 +26,7 @@ query "Cats that have acquired immunity to the drug they used" (Long $tresholdDa
     )  
 end
 
-query "Cats at risk of organ damage - SREDNJE_JAK_LEK" (Long $tresholdDate)
+query "cats_at_risk_of_organ_damage_SREDNJE_JAK_LEK" (Long $tresholdDate)
 	Cat($jmbm: jmbm)
 	Medicine($id: id)
 
@@ -45,7 +46,7 @@ query "Cats at risk of organ damage - SREDNJE_JAK_LEK" (Long $tresholdDate)
     )
 end
 
-query "Cats at risk of organ damage - JAK_LEK" (Long $tresholdDate)
+query "cats_at_risk_of_organ_damage_JAK_LEK" (Long $tresholdDate)
 	Cat($jmbm: jmbm)
 	Medicine($id: id)
 
@@ -65,8 +66,7 @@ query "Cats at risk of organ damage - JAK_LEK" (Long $tresholdDate)
     )
 end
 
-/*
-query "Cats with possible chronic diseases" (Long $tresholdDate)
+query "cats_with_possible_chronic_diseases" (Long $tresholdDate)
 	Cat($jmbm: jmbm)
 	Disease($id: id)
 
@@ -85,7 +85,7 @@ query "Cats with possible chronic diseases" (Long $tresholdDate)
     )
 end
 
-query "Cat breed average occurance in all therapies" (String $catBreed)
+query "cat_breed_avg_occ_in_therapies" (String $catBreed)
 
 	$therapies: List(size > 0) from collect (
 		Therapy()
@@ -96,4 +96,3 @@ query "Cat breed average occurance in all therapies" (String $catBreed)
         count($t)
     )
 end
-*/

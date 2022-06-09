@@ -17,7 +17,6 @@ import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Gender;
 import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.enums.TherapyStrength;
-import com.vet.mackolec.models.helper.MostSusceptibleToDiseaseReport;
 import com.vet.mackolec.models.helper.ReportBreed;
 
 import org.junit.Before;
@@ -64,12 +63,15 @@ public class QueriesTests {
 		
 		Therapy therapy1 = new Therapy();
 		therapy1.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
+		
 		Therapy therapy2 = new Therapy();
 		therapy2.setDate((new Date()).getTime() - SIX_MONTHS + 2*ONE_MONTH);
+		
 		Therapy therapy3 = new Therapy();
 		therapy3.setDate((new Date()).getTime() - SIX_MONTHS + 3*ONE_MONTH);
 		Therapy therapy4 = new Therapy();
 		therapy4.setDate((new Date()).getTime() - 2*SIX_MONTHS - 2*ONE_MONTH);
+		
 		Therapy therapy5 = new Therapy();
 		therapy5.setDate((new Date()).getTime() - SIX_MONTHS + ONE_MONTH);
 		
@@ -96,7 +98,7 @@ public class QueriesTests {
 		kieSession.insert(therapy6);
 		
 		
-		QueryResults results = kieSession.getQueryResults("Cats that have acquired immunity to the drug they used", (new Date()).getTime() - TWELVE_MONTHS);
+		QueryResults results = kieSession.getQueryResults("cats_acquired_immunity_to_the_drug", (new Date()).getTime() - TWELVE_MONTHS);
 		System.out.println(results.size());
 		
 		assertEquals(1, results.size());
@@ -195,7 +197,7 @@ public class QueriesTests {
 	    kieSession.insert(therapy9);
 	    
 	    
-	    QueryResults results = kieSession.getQueryResults("Cats at risk of organ damage - SREDNJE_JAK_LEK", (new Date()).getTime() - SIX_MONTHS);
+	    QueryResults results = kieSession.getQueryResults("cats_at_risk_of_organ_damage_SREDNJE_JAK_LEK", (new Date()).getTime() - SIX_MONTHS);
 	    System.out.println(results.size());
 	    
 	    assertEquals(1, results.size());
@@ -302,7 +304,7 @@ public class QueriesTests {
 	    kieSession.insert(therapy9);
 	    
 	    
-	    QueryResults results = kieSession.getQueryResults("Cats at risk of organ damage - JAK_LEK", (new Date()).getTime() - 3*ONE_MONTH);
+	    QueryResults results = kieSession.getQueryResults("cats_at_risk_of_organ_damage_JAK_LEK", (new Date()).getTime() - 3*ONE_MONTH);
 	    System.out.println(results.size());
 	    
 	    assertEquals(1, results.size());
@@ -390,7 +392,7 @@ public class QueriesTests {
 	    kieSession.insert(therapy7);
 	    
 	    
-	    QueryResults results = kieSession.getQueryResults("Cats with possible chronic diseases", (new Date()).getTime() - 2*TWELVE_MONTHS);
+	    QueryResults results = kieSession.getQueryResults("cats_with_possible_chronic_diseases", (new Date()).getTime() - 2*TWELVE_MONTHS);
 	    System.out.println(results.size());
 	    
 	    assertEquals(1, results.size());
@@ -468,7 +470,7 @@ public class QueriesTests {
 //	    kieSession.insert(mstdr);
 	    
 	    for (ReportBreed reportBreed : breeds) {
-	    	QueryResults results = kieSession.getQueryResults("Cat breed average occurance in all therapies", reportBreed.getBreedName());
+	    	QueryResults results = kieSession.getQueryResults("cat_breed_avg_occ_in_therapies", reportBreed.getBreedName());
 	    	System.out.println("---------------------------------");
 	    	System.out.println(reportBreed.getBreedName());
 	    	System.out.println("Results size: " + results.size());
@@ -483,6 +485,7 @@ public class QueriesTests {
 	private void setCatAndMedicineToTherapy(Therapy therapy, Cat cat, Medicine m) {
 		therapy.setCat(cat);
 		therapy.setMedicine(m);
+		therapy.setTherapyStrength(TherapyStrength.UNDEFINED);
 	}
 
 	private Cat createCat(String jmbm) {
