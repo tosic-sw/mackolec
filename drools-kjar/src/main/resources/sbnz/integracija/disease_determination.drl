@@ -1,6 +1,17 @@
 package sbnz.integracija
 
-import com.vet.mackolec.models.*
+import com.vet.mackolec.models.*;
+
+import java.util.*;
+
+function boolean isMemberOf(Symptom symptom, Set symptoms) {
+	for (Object element: symptoms) {
+        Symptom realSymptom = (Symptom) element;
+	    if (realSymptom.getName().equals(symptom.getName()))
+	    	return true;
+    }
+	return false;
+}
 
 rule "DiseaseDetermination"
 	salience (-((double) 100*$value / (double) $symptoms.size() + $value))
@@ -11,7 +22,7 @@ rule "DiseaseDetermination"
 		$disease: Disease($symptoms: symptoms)
 		
     	Number($value: intValue > 0) from accumulate(
-        	$oS: ObservedSymptom(symptom memberOf $symptoms) from $observedSymptoms,
+        	$oS: ObservedSymptom(eval(isMemberOf(symptom, $symptoms))) from $observedSymptoms,
         	count($oS)
         )
         

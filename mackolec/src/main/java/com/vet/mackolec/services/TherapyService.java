@@ -8,5 +8,8 @@ import com.vet.mackolec.models.Therapy;
 public interface TherapyService {
 	
 	public Page<Therapy> search(String search, Pageable pageable);
+	
+	Therapy getLastTherapyOfCat(String jmbm);
 
+	void save(Therapy therapy);
 }

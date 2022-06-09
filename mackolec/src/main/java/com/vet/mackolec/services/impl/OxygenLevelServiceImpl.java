@@ -1,7 +1,16 @@
-package com.vet.mackolec.services;
+package com.vet.mackolec.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.vet.mackolec.events.AlarmNotificationEvent;
+import com.vet.mackolec.events.OxygenLevelEvent;
+import com.vet.mackolec.exceptions.HospitalizedCatException;
+import com.vet.mackolec.models.HospitalizedCat;
+import com.vet.mackolec.services.AlarmNotificationService;
+import com.vet.mackolec.services.HospitalizedCatService;
+import com.vet.mackolec.services.OxygenLevelService;
+import com.vet.mackolec.websocket.WebSocketService;
 
 import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieSession;
@@ -9,16 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.vet.mackolec.events.AlarmNotificationEvent;
-import com.vet.mackolec.events.FluidFlowEvent;
-import com.vet.mackolec.exceptions.HospitalizedCatException;
-import com.vet.mackolec.models.HospitalizedCat;
-import com.vet.mackolec.websocket.WebSocketService;
-
 @Service
-public class FluidFlowServiceImpl implements FluidFlowService {
-
-	private static final String AGENDA = "fluid_level";
+public class OxygenLevelServiceImpl implements OxygenLevelService {
+	
+	private static final String AGENDA = "oxygen_level";
 	
 	@Autowired
 	private HospitalizedCatService hospitalizedCatService;
@@ -30,18 +33,18 @@ public class FluidFlowServiceImpl implements FluidFlowService {
 	private WebSocketService webSocketService;
 	
 	@Autowired
-	@Qualifier(value = "cep-session-fluid")
+	@Qualifier(value = "cep-session-oxygen")
 	private KieSession kieSession;
 	
 	
 	@Override
-	public void resonate(FluidFlowEvent fluidLevelEvent) throws HospitalizedCatException {
-		HospitalizedCat hospitalizedCat = hospitalizedCatService.findOneByJmbm(fluidLevelEvent.getJmbm());
+	public void resonate(OxygenLevelEvent oxygenLevelEvent) throws HospitalizedCatException {
+		HospitalizedCat hospitalizedCat = hospitalizedCatService.findOneByJmbm(oxygenLevelEvent.getJmbm());
 		if(hospitalizedCat == null) {
-			throw new HospitalizedCatException(String.format("There is no hospitalized cat with sent jmbm: '%s'", fluidLevelEvent.getJmbm()));
+			throw new HospitalizedCatException(String.format("There is no hospitalized cat with sent jmbm: '%s'", oxygenLevelEvent.getJmbm()));
 		}
-		
-		kieSession.insert(fluidLevelEvent);
+
+		kieSession.insert(oxygenLevelEvent);
 		kieSession.fireAllRules();
 		resetAgenda(kieSession, AGENDA);
 
@@ -58,7 +61,7 @@ public class FluidFlowServiceImpl implements FluidFlowService {
 			webSocketService.sendNotifications(notifications);
 		}
 	}
-	
+
 	@Override
 	public void resetAgenda(KieSession kieSession, String agenda) {
 		kieSession.getAgenda().getAgendaGroup(agenda).setFocus();

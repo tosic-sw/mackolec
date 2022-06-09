@@ -6,13 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.kie.api.KieBase;
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
-
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.Disease;
 import com.vet.mackolec.models.Medicine;
@@ -25,6 +18,13 @@ import com.vet.mackolec.models.enums.Gender;
 import com.vet.mackolec.models.enums.Hospitalization;
 import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.enums.TherapyStrength;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.kie.api.KieBase;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 public class ForwardChainTests {
 	

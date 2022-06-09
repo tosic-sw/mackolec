@@ -5,5 +5,6 @@ public enum Breed {
     SIJAMSKA,
     SIBIRSKA,
     SKOTSKA,
-    MAINE_COON
+    MAINE_COON,
+    SFINKS
 }

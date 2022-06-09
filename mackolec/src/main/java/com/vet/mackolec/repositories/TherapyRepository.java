@@ -20,4 +20,7 @@ public interface TherapyRepository extends JpaRepository<Therapy, Long>{
 			+ "or lower(t.medicine.name) like lower(concat('%', :search, '%')) ")
 	Page<Therapy> search(@Param("search") String search, Pageable pageable);
 	
+	@Query("select therapy from Therapy therapy where therapy.cat.jmbm = ?1 order by therapy.date desc")
+	Page<Therapy> getLastTherapyOfCat(String jmbm, Pageable pageable);
+	
 }

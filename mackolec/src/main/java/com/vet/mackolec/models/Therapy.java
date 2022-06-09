@@ -30,8 +30,14 @@ public class Therapy {
     private Long date;
     
     @NonNull
-    @Column(name = "hospitalization", nullable=false) // Obrisati
+    @Column(name = "hospitalization", nullable=false)
     private Hospitalization hospitalization;
+    
+    @Column(name = "current_age")
+    private Integer currentAge;
+    
+    @Column(name = "current_weight")
+    private Integer currentWeight;
 
     @NonNull
     @ManyToOne
@@ -39,7 +45,7 @@ public class Therapy {
     private Cat cat;
 
     @NonNull
-    @OneToMany(mappedBy = "therapy")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ObservedSymptom> observedSymptoms;
 
     @NonNull
