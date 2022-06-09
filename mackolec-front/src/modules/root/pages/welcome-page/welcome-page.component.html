@@ -1,7 +1,4 @@
 <div>
-    <div style="text-align: center;">
-        <h1>WELCOME TO VET STATION</h1>
-    </div>
     <mat-tab-group mat-align-tabs="center" [(selectedIndex)]=currentTab>
         <mat-tab label="Symptoms">
             <app-symptoms (symptomsEvent)="symptomsDTO($event)"></app-symptoms>
