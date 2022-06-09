@@ -4,6 +4,7 @@ import { AlarmNotificationsPageComponent } from './pages/alarm-notifications-pag
 import { HospitalizedCatsPageComponent } from './pages/hospitalized-cats-page/hospitalized-cats-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RootLayoutPageComponent } from './pages/root-layout-page/root-layout-page.component';
+import { TherapiesPageComponent } from './pages/therapies-page/therapies-page.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: "hospitalized-cats",
         component: HospitalizedCatsPageComponent,
+      },
+      {
+        path: "therapies",
+        component: TherapiesPageComponent,
       }
     ]
   },

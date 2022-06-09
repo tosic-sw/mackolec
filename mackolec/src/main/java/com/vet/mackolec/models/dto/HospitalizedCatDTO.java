@@ -1,4 +1,4 @@
-package com.vet.mackolec.dto;
+package com.vet.mackolec.models.dto;
 
 import com.vet.mackolec.models.HospitalizedCat;
 

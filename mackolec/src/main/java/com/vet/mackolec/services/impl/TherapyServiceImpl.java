@@ -29,4 +29,10 @@ public class TherapyServiceImpl implements TherapyService {
 	public void save(Therapy therapy) {
 		therapyRepository.save(therapy);
 	}
+	
+	@Override
+	public Page<Therapy> search(String search, Pageable pageable) {
+		return therapyRepository.search(search, pageable);
+	}
+	
 }

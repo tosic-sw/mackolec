@@ -1,0 +1,52 @@
+<div class="heading">
+    <h1>Therapies</h1>
+</div>
+
+<div class="container" *ngIf="therapies">
+
+    <div class="row bott">
+        <div class="col-12">
+            <app-search-input-btn (searchBtnClicked)="search($event)"></app-search-input-btn>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="center" scope="col">Jmbm</th>
+                    <th class="center" scope="col">Name</th>
+                    <th class="center" scope="col">Disease</th>
+                    <th class="center" scope="col">Medicine</th>
+                    <th class="center" scope="col">Therapy strength</th>
+                    <th class="center" scope="col">Date</th>
+                    <th class="center" scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let therapy of therapies">
+                    <td class="center">{{therapy.cat.jmbm}}</td>
+                    <td class="center">{{therapy.cat.name}}</td>
+                    <td class="center">{{therapy.diseaseName}}</td>
+                    <td class="center">{{therapy.medicineName}}</td>
+                    <td class="center">{{therapy.therapyStrength}}</td>
+                    <td class="center">{{therapy.date | dateFormat: 'HH:mm DD.MM.YYYY'}}</td>
+                    <td class="center">
+                        <button type="button" id="buttonSearch" class="btn btn-dark" (click)="details(therapy)">
+                            <mat-icon matTooltip="Show therapy details">list</mat-icon>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <app-pagination [totalItems]="totalSize" [pageSize]="pageSize" (pageSelected)="changePage($event)"></app-pagination>
+        </div>
+    </div>
+
+</div>

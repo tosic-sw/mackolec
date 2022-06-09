@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.vet.mackolec.models.Therapy;
-import com.vet.mackolec.models.enums.Hospitalization;
-import com.vet.mackolec.models.enums.TherapyStrength;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

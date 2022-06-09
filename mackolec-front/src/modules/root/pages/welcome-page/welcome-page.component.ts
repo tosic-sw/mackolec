@@ -49,6 +49,7 @@ export class WelcomePageComponent {
     this.observationService.saveObservation(catObservationDTO).subscribe((response: any) => {
       this.snackBarService.openSnackBar("Cat observed and therapy is determined.");
       console.log(response.body);
+      this.router.navigate(['my-app/therapies']);
       // window.location.reload();
     },
       (err: any) => {

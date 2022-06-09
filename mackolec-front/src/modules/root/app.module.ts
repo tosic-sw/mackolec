@@ -22,6 +22,10 @@ import { SymptomsComponent } from './components/symptoms/symptoms.component';
 import { MaterialExampleModule } from 'src/material.module';
 import { GeneralAboutCatComponent } from './components/general-about-cat/general-about-cat.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TherapiesPageComponent } from './pages/therapies-page/therapies-page.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TherapyDetailsDialogComponent } from './components/therapy-details-dialog/therapy-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HospitalizedCatsPageComponent,
     SearchInputBtnComponent,
     SymptomsComponent,
-    GeneralAboutCatComponent
+    GeneralAboutCatComponent,
+    TherapiesPageComponent,
+    TherapyDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MaterialExampleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

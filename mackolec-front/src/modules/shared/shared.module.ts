@@ -7,13 +7,15 @@ import { SocketService } from './services/socket.service';
 import { UtilService } from './services/util.service';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { UpperFirstLetterPipe } from './pipes/upper-first-letter.pipe';
+import { HospitalizationPipe } from './pipes/hospitalization.pipe';
 
 
 
 @NgModule({
   declarations: [
     DateFormatPipe,
-    UpperFirstLetterPipe
+    UpperFirstLetterPipe,
+    HospitalizationPipe
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { UpperFirstLetterPipe } from './pipes/upper-first-letter.pipe';
   ],
   exports: [
     DateFormatPipe, 
-    UpperFirstLetterPipe
+    UpperFirstLetterPipe,
+    HospitalizationPipe
   ],
   providers: [
     SnackBarService,
