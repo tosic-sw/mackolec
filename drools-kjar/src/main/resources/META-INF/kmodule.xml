@@ -5,6 +5,10 @@
    <kbase name="default" packages="sbnz.integracija">
         <ksession name="default-session" type="stateful"/>
     </kbase>
+    
+    <kbase name="query" packages="sbnz.queries">
+        <ksession name="queries-session" type="stateful"/>
+    </kbase>
    
    <kbase name="cep" eventProcessingMode="stream" packages="sbnz.cep">
         <ksession name="cep-session-pseudo" type="stateful" clockType="pseudo"/>

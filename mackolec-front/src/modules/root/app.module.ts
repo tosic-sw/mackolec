@@ -26,6 +26,7 @@ import { TherapiesPageComponent } from './pages/therapies-page/therapies-page.co
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TherapyDetailsDialogComponent } from './components/therapy-details-dialog/therapy-details-dialog.component';
+import { ReportsPageComponent } from './pages/reports-page/reports-page.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TherapyDetailsDialogComponent } from './components/therapy-details-dial
     SymptomsComponent,
     GeneralAboutCatComponent,
     TherapiesPageComponent,
-    TherapyDetailsDialogComponent
+    TherapyDetailsDialogComponent,
+    ReportsPageComponent
   ],
   imports: [
     BrowserModule,

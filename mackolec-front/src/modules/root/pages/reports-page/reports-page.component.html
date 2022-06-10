@@ -1,0 +1,93 @@
+<div class="container">
+
+    <div class="row bott">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-8">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Reports type</mat-label>
+                        <mat-select [(value)]="selectedReportType">
+                            <mat-option *ngFor="let option of reportsType" [value]="option">{{option}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-2" style="margin-top: 3%;">
+                    <button id="report-button" class="btn btn-success" (click)="getReport()"> Report </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="selectedReportType == reportsType[1]" class="row bott">
+        <div class="col-12" style="transform: translate(-7.6%);">
+            <div class="row">
+                <div class="col-8">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Medicine category</mat-label>
+                        <mat-select [(value)]="selectedMedicineCategory">
+                            <mat-option *ngFor="let option of medicineCategories" [value]="option">
+                                {{option == 'SREDNJE_JAK_LEK' ? 'SREDNJE JAK' : 'JAK'}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="showTable">
+        <div class="col">
+            <div
+                style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-bottom: 2%;">
+                <h3>{{tableTitle}}</h3>
+            </div>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="center" scope="col">Jmbm</th>
+                        <th class="center" scope="col">Name</th>
+                        <th class="center" scope="col">Age</th>
+                        <th class="center" scope="col">Weight</th>
+                        <th class="center" scope="col">Breed</th>
+                        <th class="center" scope="col">Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let report of reportContent">
+                        <td class="center">{{report.cat.jmbm}}</td>
+                        <td class="center">{{report.cat.name}}</td>
+                        <td class="center">{{report.cat.age}} mo.</td>
+                        <td class="center">{{report.cat.weight / 1000}} kg</td>
+                        <td class="center">{{report.cat.breed | upperFirstLetter}}</td>
+                        <td class="center">{{report.cat.gender | upperFirstLetter}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="showPie">
+        <div class="col">
+            <div
+                style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-bottom: 2%;">
+                <h3>{{pieTitle}}</h3>
+            </div>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="center" scope="col">Breed name</th>
+                        <th class="center" scope="col">Occurance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let datum of dataPie">
+                        <td class="center">{{datum.breedName}}</td>
+                        <td class="center">{{datum.numOfOccurance}} %</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
