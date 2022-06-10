@@ -7,6 +7,7 @@ import java.util.Map;
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.Therapy;
 import com.vet.mackolec.models.dto.CatTherapiesReportDTO;
+import com.vet.mackolec.models.dto.ReportBreedDTO;
 import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.helper.ReportBreed;
 import com.vet.mackolec.services.TherapyService;
@@ -67,8 +68,8 @@ public class ReportController {
 	}
 	
 	@GetMapping("/catBreed")
-	public ResponseEntity<List<ReportBreed>> getCatBreedAvgOccuranceInTherapies(){
+	public ResponseEntity<ReportBreedDTO> getCatBreedAvgOccuranceInTherapies(){
 		List<ReportBreed> breeds = therapyService.catBreedReport();
-		return new ResponseEntity<>(breeds, HttpStatus.OK);
+		return new ResponseEntity<>(new ReportBreedDTO(breeds), HttpStatus.OK);
 	}
 }

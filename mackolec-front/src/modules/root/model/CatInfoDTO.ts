@@ -9,3 +9,12 @@ export interface CatInfoDTO {
     breed: Breed,
     gender: Gender
 }
+
+export interface CatInfoStringDTO {
+    jmbm: string,
+    name: string,
+    age: number,
+    weight: number,
+    breed: string,
+    gender: string
+}

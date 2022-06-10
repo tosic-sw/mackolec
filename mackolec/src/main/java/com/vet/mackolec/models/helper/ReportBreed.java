@@ -13,5 +13,5 @@ public class ReportBreed {
 
 	private String breedName;
 	
-	private Integer avgOccurance;
+	private Integer numOfOccurance;
 }

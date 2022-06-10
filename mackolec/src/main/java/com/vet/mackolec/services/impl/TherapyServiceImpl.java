@@ -72,7 +72,7 @@ public class TherapyServiceImpl implements TherapyService {
 	public Map<String, List<Therapy>> aquiredImmunityReport() {
 		
 		// config session
-		KieBase kieBase = kieContainer.getKieBase("default");
+		KieBase kieBase = kieContainer.getKieBase("query");
 		KieSession kieSession = kieBase.newKieSession();
 		
 		// insert cats and therapies into kieSession
@@ -87,7 +87,7 @@ public class TherapyServiceImpl implements TherapyService {
 	@Override
 	public Map<String, List<Therapy>> riskOfOrganDamageReport(MedicineCategory medicineCategory) {
 		// config session
-		KieBase kieBase = kieContainer.getKieBase("default");
+		KieBase kieBase = kieContainer.getKieBase("query");
 		KieSession kieSession = kieBase.newKieSession();
 		
 		// insert cats and therapies into kieSession
@@ -108,7 +108,7 @@ public class TherapyServiceImpl implements TherapyService {
 	@Override
 	public Map<String, List<Therapy>> possibleChronicDiseaseReport() {
 		// config session
-		KieBase kieBase = kieContainer.getKieBase("default");
+		KieBase kieBase = kieContainer.getKieBase("query");
 		KieSession kieSession = kieBase.newKieSession();
 		
 		// insert cats and therapies into kieSession
@@ -123,7 +123,7 @@ public class TherapyServiceImpl implements TherapyService {
 	@Override
 	public List<ReportBreed> catBreedReport() {
 		// config session
-		KieBase kieBase = kieContainer.getKieBase("default");
+		KieBase kieBase = kieContainer.getKieBase("query");
 		KieSession kieSession = kieBase.newKieSession();
 		
 		// insert therapies into kieSession
@@ -134,7 +134,7 @@ public class TherapyServiceImpl implements TherapyService {
 	    for (ReportBreed reportBreed : breeds) {
 	    	QueryResults results = kieSession.getQueryResults("cat_breed_avg_occ_in_therapies", reportBreed.getBreedName());
 	    	for (QueryResultsRow qResult : results) {
-	    		reportBreed.setAvgOccurance((Integer) qResult.get("$value"));
+	    		reportBreed.setNumOfOccurance((Integer) qResult.get("$value"));
 	    	}
 	    }
 	    

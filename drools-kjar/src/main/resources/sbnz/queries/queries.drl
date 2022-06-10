@@ -1,11 +1,14 @@
-package sbnz.integracija
+package sbnz.queries
 
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.Disease;
 import com.vet.mackolec.models.Therapy;
+import com.vet.mackolec.models.Medicine;
 
 import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.enums.TherapyStrength;
+
+import java.util.*;
 
 query "cats_acquired_immunity_to_the_drug" (Long $tresholdDate)
 	

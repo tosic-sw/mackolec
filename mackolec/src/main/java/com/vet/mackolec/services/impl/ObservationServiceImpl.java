@@ -8,12 +8,14 @@ import java.util.Set;
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.Disease;
 import com.vet.mackolec.models.HospitalizedCat;
+import com.vet.mackolec.models.Medicine;
 import com.vet.mackolec.models.ObservedSymptom;
 import com.vet.mackolec.models.Symptom;
 import com.vet.mackolec.models.Therapy;
 import com.vet.mackolec.models.dto.ObservedSymptomDTO;
 import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Hospitalization;
+import com.vet.mackolec.models.enums.MedicineCategory;
 import com.vet.mackolec.models.enums.TherapyStrength;
 import com.vet.mackolec.services.CatService;
 import com.vet.mackolec.services.DiseaseService;
@@ -68,7 +70,6 @@ public class ObservationServiceImpl implements ObservationService {
 		therapy.setHospitalization(Hospitalization.UNDEFINED);
 		therapy.setTherapyStrength(TherapyStrength.UNDEFINED);
 		therapy.setDate(new Date().getTime());
-
 		
 		cat = catService.save(cat);
 		cat.setAgeEnum(CatAge.UNDEFINED);

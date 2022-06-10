@@ -22,6 +22,7 @@ import { SymptomsComponent } from './components/symptoms/symptoms.component';
 import { MaterialExampleModule } from 'src/material.module';
 import { GeneralAboutCatComponent } from './components/general-about-cat/general-about-cat.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReportsPageComponent } from './pages/reports-page/reports-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HospitalizedCatsPageComponent,
     SearchInputBtnComponent,
     SymptomsComponent,
-    GeneralAboutCatComponent
+    GeneralAboutCatComponent,
+    ReportsPageComponent
   ],
   imports: [
     BrowserModule,
