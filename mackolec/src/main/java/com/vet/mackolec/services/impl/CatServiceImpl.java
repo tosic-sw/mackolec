@@ -1,5 +1,7 @@
 package com.vet.mackolec.services.impl;
 
+import java.util.List;
+
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.repositories.CatRepository;
 import com.vet.mackolec.services.CatService;
@@ -24,6 +26,11 @@ public class CatServiceImpl implements CatService {
 			catFromDB = catRepository.save(catFromDB);
 			return catFromDB;
 		}
+	}
+
+	@Override
+	public List<Cat> findAll() {
+		return catRepository.findAll();
 	}
 
 	

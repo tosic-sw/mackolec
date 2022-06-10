@@ -1,8 +1,8 @@
 insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0001', 'Paja', 36, 3000, 'RUSKA', 'ODRASLA_MACKA', 'MALE');
-insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0002', 'Gaja', 36, 3000, 'RUSKA', 'ODRASLA_MACKA', 'MALE');
-insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0003', 'Vlaja', 36, 3000, 'RUSKA', 'ODRASLA_MACKA', 'MALE');
-insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0004', 'Soraja', 36, 3000, 'RUSKA', 'ODRASLA_MACKA', 'FEMALE');
-insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0005', 'Kica', 36, 3000, 'RUSKA', 'ODRASLA_MACKA', 'MALE');
+insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0002', 'Gaja', 29, 2400, 'SIJAMSKA', 'ODRASLA_MACKA', 'MALE');
+insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0003', 'Vlaja', 46, 7100, 'RUSKA', 'ODRASLA_MACKA', 'MALE');
+insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0004', 'Maza', 26, 3300, 'SFINKS', 'ODRASLA_MACKA', 'FEMALE');
+insert into cat(jmbm, name, age, weight, breed, age_enum, gender) values ('0005', 'Kica', 15, 1400, 'MAINE_COON', 'MLADA_MACKA', 'MALE');
 
 insert into hospitalized_cat(date, cat_id) values (1654538400000, 1);
 insert into hospitalized_cat(date, cat_id) values (1654538400000, 2);
@@ -188,3 +188,76 @@ insert into medicine_unsuitable_age values (16, 'STARA_MACKA');
 insert into medicine_unsuitable_age values (19, 'MACE');
 insert into medicine_unsuitable_age values (19, 'STARA_MACKA');
 insert into medicine_unsuitable_age values (22, 'MACE');
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG100', 1654077600000, 'NO_NEED', 36, 3200, 1, 2, 7);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG200', 1654164000000, 'NO_NEED', 36, 3480, 1, 2, 7);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG300', 1654250400000, 'NO_NEED', 36, 3350, 1, 2, 7);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG400', 1654336800000, 'NO_NEED', 36, 3000, 1, 2, 7);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG100', 1651399200000, 'NO_NEED', 29, 2350, 2, 4, 13);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG200', 1651485600000, 'NO_NEED', 29, 2300, 2, 4, 13);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG300', 1651572000000, 'NO_NEED', 29, 2200, 2, 4, 13);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG400', 1651658400000, 'NO_NEED', 29, 2400, 2, 4, 13);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG400', 1648850400000, 'NO_NEED', 36, 3200, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG400', 1650751200000, 'NO_NEED', 36, 3900, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG400', 1651442400000, 'NO_NEED', 37, 4500, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG400', 1653343200000, 'NO_NEED', 37, 5900, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG500', 1653688800000, 'NO_NEED', 38, 7200, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG500', 1654552800000, 'NO_NEED', 38, 7100, 3, 5, 18);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1648850400000, 'NO_NEED', 24, 3100, 4, 6, 22);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1650751200000, 'NO_NEED', 24, 3100, 4, 6, 22);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1651442400000, 'NO_NEED', 25, 3100, 4, 6, 22);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1653343200000, 'NO_NEED', 25, 3100, 4, 6, 22);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1653688800000, 'NO_NEED', 26, 3200, 4, 6, 22);
+
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+            values ('MG300', 1654552800000, 'NO_NEED', 26, 3300, 4, 6, 22);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG100', 1653472800000, 'NO_NEED', 15, 2350, 5, 5, 17);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG200', 1653818400000, 'NO_NEED', 15, 2300, 5, 5, 17);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG300', 1654164000000, 'NO_NEED', 15, 2200, 5, 5, 18);
+		    
+insert into therapy(therapy_strength, date, hospitalization, current_age, current_weight, cat_id, disease_id, medicine_id) 
+		    values ('MG400', 1654509600000, 'NO_NEED', 15, 2400, 5, 5, 18);
+		    

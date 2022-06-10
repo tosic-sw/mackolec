@@ -7,4 +7,6 @@ import com.vet.mackolec.models.Disease;
 public interface DiseaseService {
 
 	List<Disease> getDiseasesWithSymptomsAndMedicines();
+	
+	List<Disease> findAll();
 }

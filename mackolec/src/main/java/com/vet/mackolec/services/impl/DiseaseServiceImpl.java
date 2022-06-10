@@ -28,4 +28,10 @@ public class DiseaseServiceImpl implements DiseaseService {
 		return diseases;
 	}
 
+
+	@Override
+	public List<Disease> findAll() {
+		return diseaseRepository.findAll();
+	}
+
 }
