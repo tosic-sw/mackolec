@@ -37,8 +37,6 @@ public class TherapyServiceImpl implements TherapyService {
 	
 	private static Long SIX_MONTHS = 15778463000L;
 	
-	private static Long ONE_MONTH = 2629743830L;
-	
 	@Autowired
 	private TherapyRepository therapyRepository;
 	

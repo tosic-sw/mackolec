@@ -1,5 +1,5 @@
 .center {
-    text-align: center; 
+    text-align: center;
     vertical-align: middle;
 }
 
@@ -16,4 +16,12 @@
     margin-bottom: 1%;
 }
 
-.col-12 { display: flex; justify-content: flex-end; }
+.col-12 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}

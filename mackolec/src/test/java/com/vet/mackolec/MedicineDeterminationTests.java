@@ -1,16 +1,9 @@
 package com.vet.mackolec;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.kie.api.KieBase;
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
 
 import com.vet.mackolec.models.Cat;
 import com.vet.mackolec.models.Disease;
@@ -20,6 +13,13 @@ import com.vet.mackolec.models.enums.Breed;
 import com.vet.mackolec.models.enums.CatAge;
 import com.vet.mackolec.models.enums.Gender;
 import com.vet.mackolec.models.enums.MedicineCategory;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.kie.api.KieBase;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 public class MedicineDeterminationTests {
 	
@@ -48,7 +48,9 @@ public class MedicineDeterminationTests {
 	    kieSession.insert(therapy);
 	    kieSession.fireAllRules();
 	    
-	    assertEquals("Vetoquinol", therapy.getMedicine().getName());
+	    boolean result = (therapy.getMedicine().getName().equals("Vetoquinol")) || (therapy.getMedicine().getName().equals("OZ")); 
+	    
+	    assertTrue(result);
 	    }
 	 
 	 private Cat createCat() {

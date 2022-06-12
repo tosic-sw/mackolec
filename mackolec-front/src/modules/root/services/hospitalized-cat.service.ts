@@ -20,7 +20,7 @@ export class HospitalizedCatService {
         .set("search", search)
         .append("page", String(page))
         .append("size", String(size))
-        .append("sort", "id,asc")
+        .append("sort", "id,desc")  
     };
 
     return this.httpClient.get<HttpResponse<HospitalizedCatDTO[]>>(`mackolec/api/hospitalizedCat`, queryParams);

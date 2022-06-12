@@ -21,7 +21,7 @@ export class HospitalizedCatsPageComponent implements OnInit {
 
   constructor(private hospitalizedCatService: HospitalizedCatService, private snackBarService: SnackBarService) {
     this.hcats = [];
-    this.pageSize = 10;
+    this.pageSize = 8;
     this.currentPage = 1;
     this.totalSize = 1;
     this.searchText = "";

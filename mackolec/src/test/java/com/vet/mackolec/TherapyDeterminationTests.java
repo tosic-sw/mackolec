@@ -54,7 +54,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void therapyDetermination_MG200() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(25), new Integer(1500), Breed.RUSKA, CatAge.ODRASLA_MACKA, Gender.MALE);
@@ -70,7 +72,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void therapyDetermination_MG300() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(30), new Integer(7100), Breed.MAINE_COON, CatAge.ODRASLA_MACKA, Gender.MALE);
@@ -86,7 +90,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void therapyDetermination_MG400() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		 
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -102,7 +108,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void therapyDetermination_MG500() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(2), new Integer(7300), Breed.RUSKA, CatAge.MACE, Gender.MALE);
@@ -118,7 +126,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void strongerTherapyMG500() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -138,7 +148,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void strongerTherapyMG200() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -158,7 +170,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void newMedicineSlabToSrednji() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		 
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -179,7 +193,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void newMedicineSlabToSrednji2() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+			
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -200,7 +216,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void newMedicineSrednjiToJak() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);
@@ -221,7 +239,9 @@ public class TherapyDeterminationTests {
 	 
 	 @Test
 	 public void jakToHospitalization() {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("therapy_determination_with_history").setFocus();
 		
 		Cat cat = new Cat("1241", "Pipiripi", new Integer(9), new Integer(1800), Breed.RUSKA, CatAge.MLADA_MACKA, Gender.MALE);

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -23,11 +24,15 @@ public class BasicTransformationTests {
 	
 	 @Test
 	 public void maceTest() {
-		KieSession kieSession = kieContainer.newKieSession();
+
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		
 		kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		
 	    Cat cat = new Cat();
 	    cat.setAge(2);
+	    cat.setAgeEnum(CatAge.UNDEFINED);
 	    
 	    kieSession.insert(cat);
 	    kieSession.fireAllRules();
@@ -37,25 +42,30 @@ public class BasicTransformationTests {
 	 
 	 @Test
 	 public void mladaMackaTest() {
-		 KieSession kieSession = kieContainer.newKieSession();
-		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+		kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		 
-		 Cat cat = new Cat();
-		 cat.setAge(4);
+		Cat cat = new Cat();
+		cat.setAge(4);
+	    cat.setAgeEnum(CatAge.UNDEFINED);
 		    
-		 kieSession.insert(cat);
-		 kieSession.fireAllRules();
+		kieSession.insert(cat);
+		kieSession.fireAllRules();
 		    
-		 assertEquals(cat.getAgeEnum(), CatAge.MLADA_MACKA);
+		assertEquals(cat.getAgeEnum(), CatAge.MLADA_MACKA);
 	 }
 	 
 	 @Test
 	 public void odraslaMackaTest() {
-		 KieSession kieSession = kieContainer.newKieSession();
-		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+			
+		kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		 
 		 Cat cat = new Cat();
 		 cat.setAge(25);
+		    cat.setAgeEnum(CatAge.UNDEFINED);
 		    
 		 kieSession.insert(cat);
 		 kieSession.fireAllRules();
@@ -65,11 +75,14 @@ public class BasicTransformationTests {
 	 
 	 @Test
 	 public void staraMackaTest() {
-		 KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("default");
+		KieSession kieSession = kieBase.newKieSession();
+
 		 kieSession.getAgenda().getAgendaGroup("basic_transformation").setFocus();
 		 
 		 Cat cat = new Cat();
 		 cat.setAge(50);
+		    cat.setAgeEnum(CatAge.UNDEFINED);
 		    
 		 kieSession.insert(cat);
 		 kieSession.fireAllRules();

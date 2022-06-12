@@ -23,9 +23,9 @@ export class TherapiesPageComponent implements OnInit {
   @ViewChild(PaginationComponent) pagination!: PaginationComponent;
 
   constructor(private therapyService: TherapyService, private snackBarService: SnackBarService,
-              public dialog: MatDialog) { 
+    public dialog: MatDialog) {
     this.therapies = [];
-    this.pageSize = 10;
+    this.pageSize = 8;
     this.currentPage = 1;
     this.totalSize = 1;
     this.searchText = "";
@@ -42,18 +42,18 @@ export class TherapiesPageComponent implements OnInit {
       this.therapies = response.body;
       this.totalSize = Number(response.headers.get("total-elements"));
 
-      if(newPage === 1)
+      if (newPage === 1)
         this.pagination.reset();
     },
-    (error) => {
-      if(error.status === 500)
-        this.snackBarService.openSnackBar("An unknown error ocured while loading therapies");
-    });
+      (error) => {
+        if (error.status === 500)
+          this.snackBarService.openSnackBar("An unknown error ocured while loading therapies");
+      });
   }
 
   search(event: any) {
     let text = event as string;
-    if(!text) text = "";
+    if (!text) text = "";
 
     this.searchText = text;
 
@@ -67,9 +67,9 @@ export class TherapiesPageComponent implements OnInit {
       width: '70%',
       data: therapy
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
-      
+
     });
 
   }

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Role(Role.Type.EVENT)
-@Expires("30s")
+@Expires("15s")
 @Entity
 @Table(name = "alarm_notification")
 public class AlarmNotificationEvent {

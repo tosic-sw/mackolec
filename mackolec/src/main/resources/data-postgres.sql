@@ -10,22 +10,9 @@ insert into hospitalized_cat(date, cat_id) values (1654538400000, 3);
 insert into hospitalized_cat(date, cat_id) values (1654538400000, 4);
 insert into hospitalized_cat(date, cat_id) values (1654538400000, 5);
 
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0001', 'Ahoi', 'HEART', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0002', 'Ahoi', 'OXYGEN', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0002', 'Ahoi', 'OXYGEN', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0002', 'Ahoi', 'OXYGEN', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0002', 'Ahoi', 'OXYGEN', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0002', 'Ahoi', 'OXYGEN', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0003', 'Ahoi', 'FLUID', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0003', 'Ahoi', 'FLUID', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0003', 'Ahoi', 'FLUID', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0003', 'Ahoi', 'FLUID', 1654466400000);
-insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0003', 'Ahoi', 'FLUID', 1654466400000);
+insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0004', 'Cat has heart problems, possible heart attack!', 'HEART', 1655057640000);
+insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0004', 'Cat has heart problems, possible heart attack!', 'HEART', 1655057700000);
+insert into alarm_notification(jmbm, message, notification_type, date_time) values ('0005', 'The cat is breathing hard, oxygen level is low! Possible suffocation!', 'OXYGEN', 1655057880000);
 
 -- Periodontitis
 insert into symptom(name) values ('Gubitak apetita'); -- 1

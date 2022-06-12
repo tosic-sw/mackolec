@@ -112,7 +112,7 @@ public class CepTests {
 		kieSession.getAgenda().getAgendaGroup("oxygen_level").setFocus();
 		SessionPseudoClock clock = kieSession.getSessionClock();
 
-		for(int i = 0; i < 90; i++) {
+		for(int i = 0; i < 91; i++) {
 			kieSession.insert(new OxygenLevelEvent("001", 93.0));
 			clock.advanceTime(2, TimeUnit.SECONDS);
 			kieSession.fireAllRules();

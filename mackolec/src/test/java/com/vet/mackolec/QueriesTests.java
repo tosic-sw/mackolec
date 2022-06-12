@@ -21,6 +21,7 @@ import com.vet.mackolec.models.helper.ReportBreed;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -36,17 +37,18 @@ public class QueriesTests {
 	private static Long ONE_MONTH = 2629743830L;
 	
 	private static KieContainer kieContainer;
-	
+	  
 	@Before
     public void beforeClass() {
 		KieServices kieServices = KieServices.Factory.get();
-        kieContainer = kieServices.newKieContainer(kieServices.newReleaseId("sbnz.integracija", "drools-kjar", "0.0.1-SNAPSHOT"));
+		kieContainer = kieServices.newKieClasspathContainer();
     }
 	
 	@Test
 	public void acquiredImmunityToTheDrug() {
 	
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("query");
+		KieSession kieSession = kieBase.newKieSession();
 		
 		Cat cat1 = createCat("123");
 		Cat cat2 = createCat("124");
@@ -90,12 +92,12 @@ public class QueriesTests {
 		kieSession.insert(m1);
 		kieSession.insert(m2);
 		kieSession.insert(m3);
-		kieSession.insert(therapy1);
-		kieSession.insert(therapy2);
-		kieSession.insert(therapy3);
-		kieSession.insert(therapy4);
-		kieSession.insert(therapy5);
-		kieSession.insert(therapy6);
+		kieSession.insert(updateTherapy(therapy1));
+		kieSession.insert(updateTherapy(therapy2));
+		kieSession.insert(updateTherapy(therapy3));
+		kieSession.insert(updateTherapy(therapy4));
+		kieSession.insert(updateTherapy(therapy5));
+		kieSession.insert(updateTherapy(therapy6));
 		
 		
 		QueryResults results = kieSession.getQueryResults("cats_acquired_immunity_to_the_drug", (new Date()).getTime() - TWELVE_MONTHS);
@@ -117,10 +119,21 @@ public class QueriesTests {
 	 
 	}
 	
+	private Therapy updateTherapy(Therapy therapy) {
+		Disease d1 = new Disease();
+	    d1.setName("a");
+	    therapy.setDisease(d1);
+	    return therapy;
+	}
+	
+
 	@Test
 	public void catsAtRiskOfOrganDamageSREDNJE() {
 	
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("query");
+		KieSession kieSession = kieBase.newKieSession();
+		
+//		KieSession kieSession = kieContainer.newKieSession("queries-session");
 		
 	    Cat cat1 = createCat("123");
 	    Cat cat2 = createCat("124");
@@ -186,15 +199,15 @@ public class QueriesTests {
 	    kieSession.insert(m1);
 	    kieSession.insert(m2);
 	    kieSession.insert(m3);
-	    kieSession.insert(therapy1);
-	    kieSession.insert(therapy2);
-	    kieSession.insert(therapy3);
-	    kieSession.insert(therapy4);
-	    kieSession.insert(therapy5);
-	    kieSession.insert(therapy6);
-	    kieSession.insert(therapy7);
-	    kieSession.insert(therapy8);
-	    kieSession.insert(therapy9);
+	    kieSession.insert(updateTherapy(therapy1));
+	    kieSession.insert(updateTherapy(therapy2));
+	    kieSession.insert(updateTherapy(therapy3));
+	    kieSession.insert(updateTherapy(therapy4));
+	    kieSession.insert(updateTherapy(therapy5));
+	    kieSession.insert(updateTherapy(therapy6));
+	    kieSession.insert(updateTherapy(therapy7));
+	    kieSession.insert(updateTherapy(therapy8));
+	    kieSession.insert(updateTherapy(therapy9));
 	    
 	    
 	    QueryResults results = kieSession.getQueryResults("cats_at_risk_of_organ_damage_SREDNJE_JAK_LEK", (new Date()).getTime() - SIX_MONTHS);
@@ -211,6 +224,7 @@ public class QueriesTests {
 	    	}
 	    }
 	    
+	    
 	    assertEquals(6, therapiesFound.size());
 	 
 	}
@@ -218,7 +232,8 @@ public class QueriesTests {
 	@Test
 	public void catsAtRiskOfOrganDamageJAK() {
 	
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("query");
+		KieSession kieSession = kieBase.newKieSession();
 		
 	    Cat cat1 = createCat("123");
 	    Cat cat2 = createCat("124");
@@ -325,7 +340,8 @@ public class QueriesTests {
 	@Test
 	public void catsWithPossibleChronicDiseases() {
 	
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("query");
+		KieSession kieSession = kieBase.newKieSession();
 		
 	    Cat cat1 = createCat("123");
 	    Cat cat2 = createCat("124");
@@ -345,36 +361,51 @@ public class QueriesTests {
 	    therapy1.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy1.setDisease(disease1);
 	    therapy1.setCat(cat1);
+	    Medicine m = new Medicine();
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy1.setMedicine(m);
 	    
 	    Therapy therapy2 = new Therapy();
 	    therapy2.setDate((new Date()).getTime() - 2*ONE_MONTH);
 	    therapy2.setDisease(disease1);
 	    therapy2.setCat(cat1);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy2.setMedicine(m);
 	    
 	    Therapy therapy3 = new Therapy();
 	    therapy3.setDate((new Date()).getTime() - 7*ONE_MONTH);
 	    therapy3.setDisease(disease1);
 	    therapy3.setCat(cat1);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy3.setMedicine(m);
 	    
 	    Therapy therapy4 = new Therapy();
 	    therapy4.setDate((new Date()).getTime() - 2*SIX_MONTHS);
 	    therapy4.setDisease(disease1);
 	    therapy4.setCat(cat1);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy4.setMedicine(m);
 	    
 	    Therapy therapy5 = new Therapy();
 	    therapy5.setDate((new Date()).getTime() - SIX_MONTHS - ONE_MONTH);
 	    therapy5.setDisease(disease2);
 	    therapy5.setCat(cat2);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy5.setMedicine(m);
 	    
 	    Therapy therapy6 = new Therapy();
 	    therapy6.setDate((new Date()).getTime() - ONE_MONTH);
 	    therapy6.setDisease(disease3);
 	    therapy6.setCat(cat2);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy6.setMedicine(m);
 	    
 	    Therapy therapy7 = new Therapy();
 	    therapy7.setDate((new Date()).getTime() - 2*ONE_MONTH);
 	    therapy7.setDisease(disease3);
 	    therapy7.setCat(cat2);
+	    m.setCategory(MedicineCategory.SLAB_LEK);
+	    therapy7.setMedicine(m);
 	    
 	    
 	    
@@ -413,7 +444,8 @@ public class QueriesTests {
 	@Test
 	public void therapiesPerCatsBreed() {
 	
-		KieSession kieSession = kieContainer.newKieSession();
+		KieBase kieBase = kieContainer.getKieBase("query");
+		KieSession kieSession = kieBase.newKieSession();
 		
 	    Cat cat1 = createCat("123");
 	    cat1.setBreed(Breed.RUSKA);
@@ -425,40 +457,21 @@ public class QueriesTests {
 	    cat4.setBreed(Breed.SIJAMSKA);
 	    Cat cat5 = createCat("127");
 	    cat5.setBreed(Breed.SKOTSKA);
-	    
-		Therapy therapy1 = new Therapy();
-	    therapy1.setCat(cat1);
-		Therapy therapy2 = new Therapy();
-	    therapy2.setCat(cat2);
-		Therapy therapy3 = new Therapy();
-	    therapy3.setCat(cat3);
-		Therapy therapy4 = new Therapy();
-	    therapy4.setCat(cat4);
-		Therapy therapy5 = new Therapy();
-	    therapy5.setCat(cat5);
-		Therapy therapy6 = new Therapy();
-	    therapy6.setCat(cat4);
-		Therapy therapy7 = new Therapy();
-	    therapy7.setCat(cat3);
-		Therapy therapy8 = new Therapy();
-	    therapy8.setCat(cat2);
-		Therapy therapy9 = new Therapy();
-	    therapy9.setCat(cat1);
 		
 	    kieSession.insert(cat1);
 	    kieSession.insert(cat2);
 	    kieSession.insert(cat3);
 	    kieSession.insert(cat4);
 	    kieSession.insert(cat5);
-	    kieSession.insert(therapy1);
-	    kieSession.insert(therapy2);
-	    kieSession.insert(therapy3);
-	    kieSession.insert(therapy4);
-	    kieSession.insert(therapy5);
-	    kieSession.insert(therapy6);
-	    kieSession.insert(therapy7);
-	    kieSession.insert(therapy8);
-	    kieSession.insert(therapy9);
+	    kieSession.insert(createTherapy(cat1));
+	    kieSession.insert(createTherapy(cat2));
+	    kieSession.insert(createTherapy(cat3));
+	    kieSession.insert(createTherapy(cat4));
+	    kieSession.insert(createTherapy(cat5));
+	    kieSession.insert(createTherapy(cat4));
+	    kieSession.insert(createTherapy(cat3));
+	    kieSession.insert(createTherapy(cat2));
+	    kieSession.insert(createTherapy(cat1));
 	    
 //	    MostSusceptibleToDiseaseReport mstdr = new MostSusceptibleToDiseaseReport();
 	    List<ReportBreed> breeds = new ArrayList<ReportBreed>();
@@ -475,11 +488,21 @@ public class QueriesTests {
 	    	System.out.println(reportBreed.getBreedName());
 	    	System.out.println("Results size: " + results.size());
 	    	for (QueryResultsRow qResult : results) {
-	    		Integer numOfOccurances = (Integer) qResult.get("$avgOccurance");
+	    		Integer numOfOccurances = (Integer) qResult.get("$value");
 	    		System.out.println("Num of occurances " + numOfOccurances);
 	    	}
 	    }
 	 
+	}
+
+	private Therapy createTherapy(Cat cat) {
+		Therapy therapy = new Therapy();
+	    therapy.setCat(cat);
+	    therapy.setMedicine(new Medicine());
+	    Disease d1 = new Disease();
+	    d1.setName("a");
+	    therapy.setDisease(d1);
+	    return therapy;
 	}
 
 	private void setCatAndMedicineToTherapy(Therapy therapy, Cat cat, Medicine m) {
@@ -517,13 +540,6 @@ public class QueriesTests {
 	private Set<CatAge> getUnsuitableForMace() {
 		Set<CatAge> set = new HashSet<>();
 		set.add(CatAge.MACE);
-		return set;
-	}
-	 
-	private Set<CatAge> getUnsuitableForMladaAndOdrasla() {
-		Set<CatAge> set = new HashSet<>();
-		set.add(CatAge.MLADA_MACKA);
-		set.add(CatAge.ODRASLA_MACKA);
 		return set;
 	}
 	 
